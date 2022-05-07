@@ -5,8 +5,9 @@ export default function Navbar() {
     const [isNavExpanded, setIsNavExpanded] = useState(false)
     return (
       <nav className="navigation">
-        <a href="/" className="brand-name">
-          Yo te Llevo UC
+        <a href="/" class="flex items-center px-3">
+            <img src="https://www.uc.cl/site/templates/dist/images/logo-uc-wh.svg" class="mr-3 h-6 sm:h-9 fill-black" alt="UC Logo" />
+            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Yo Te Llevo UC</span>
         </a>
         <button className="hamburger"
                 onClick={() => {
@@ -32,13 +33,16 @@ export default function Navbar() {
           }>
           <ul>
             <li>
-              <a href="/home">Home</a>
+              <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" href="/">Home</a>
             </li>
             <li>
-              <a href="/about">About</a>
+              <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" href="/Login">Inicia Sesión</a>
             </li>
             <li>
-              <a href="/contact">Contact</a>
+              <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" href="/Register">Registrate</a>
+            </li>
+            <li>
+              <a className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" href="/Details">Viajes</a>
             </li>
           </ul>
         </div>

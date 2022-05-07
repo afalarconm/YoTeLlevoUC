@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import LandingPage from "./components/LandingPage"
 import LoginPage from "./components/LoginPage"
+import DetailsPage from "./components/DetailsPage"
+import RegisterPage from "./components/RegisterPage"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';  
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,7 +15,9 @@ root.render(
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<LandingPage/>} />
-      <Route path="/LoginPage" element={<LoginPage/>} />
+      <Route path='/Register' element={<RegisterPage/>} />
+      <Route path="/Login" element={<LoginPage/>} />
+      <Route path="/Details" element={<DetailsPage/>} />
 
     </Routes>
     
