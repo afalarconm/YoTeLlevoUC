@@ -95,7 +95,7 @@ return (
 
                 <div className=" place-items-center" align='center'>
                     <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" type="submit">
-                    Submit
+                    Registrarme
                     </button>
                 </div>
             </form>
