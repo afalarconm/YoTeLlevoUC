@@ -18,8 +18,10 @@ function App() {
           </h2>
         </div>
         
-        <button type="button" onClick={() => navigate("/Login")} class="text-whte-900 hover:text-white border border-white hover:bg-gray-100 focus:outline-none focus:ring-gray-300 font-medium rounded-lg px-20 py-6 text-center mr-5 mb-5 dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-400">Inicia Sesión</button>
-        <button type="button" onClick={() => navigate("/Register")} class="text-white-900 hover:text-white border border-white hover:bg-gray-100 focus:outline-none focus:ring-gray-300 font-medium rounded-lg px-20 py-6 text-center mr-5 mb-5 dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-400">Registrate</button>
+        <div class="flex justify-center items-center flex-row">
+          <button type="button" onClick={() => navigate("/Login")} class="text-whte-900 hover:text-white border border-white hover:bg-gray-100 focus:outline-none focus:ring-gray-300 font-medium rounded-lg px-20 py-6 text-center mr-5 mb-5 dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-400">Inicia Sesión</button>
+          <button type="button" onClick={() => navigate("/Register")} class="text-white-900 hover:text-white border border-white hover:bg-gray-100 focus:outline-none focus:ring-gray-300 font-medium rounded-lg px-20 py-6 text-center mr-5 mb-5 dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-400">Registrate</button>
+        </div>
         </section>
 
 

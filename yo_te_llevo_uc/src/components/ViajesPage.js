@@ -12,7 +12,7 @@ export default function Form() {
         <div class="flex-1">
     <div class="flex-1">
      
-        <div class="px-4 sm:px-6 lg:px-8">
+        <div class="px-4 sm:px-6 lg:px-8 py-4">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
                     <h1 class="text-xl font-semibold text-gray-900">Viajes</h1>
@@ -47,7 +47,8 @@ export default function Form() {
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">3/4</td>
 
                                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Unirme</a>
+                                            <a href="/" class="text-green-600 hover:text-green-900 px-3">Chat</a>
+                                            <a href="/" class="text-indigo-600 hover:text-indigo-900">Unirme</a>
                                         </td>
                                     </tr>
                     
@@ -60,8 +61,9 @@ export default function Form() {
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">11:30</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">3/3</td>
 
-                                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            <a href="#" class="text-red-600 hover:text-red-900">Lleno</a>
+                                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium">
+                                            <a href="/" class="text-green-600 hover:text-green-900 px-4">Chat</a>
+                                            <a href="/" class="text-red-600 hover:text-red-900 pr-4">Lleno</a>
                                         </td>
                                     </tr>
                     
@@ -75,7 +77,8 @@ export default function Form() {
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">1/4</td>
 
                                         <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-900">Unirme</a>
+                                            <a href="/" class="text-green-600 hover:text-green-900 px-3">Chat</a>
+                                            <a href="/" class="text-indigo-600 hover:text-indigo-900">Unirme</a>
                                         </td>
                                     </tr>
                     

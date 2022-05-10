@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from "./Navbar.js";
 
 
 
 
 export default function Form() {
-
+    const navigate = useNavigate()
     return (
         <div className="App bg-gray-300 min-h-screen">
         <Navbar />
@@ -26,10 +26,10 @@ export default function Form() {
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"/>
                 </div>
                 <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                <button onClick={() => navigate("/LogedIn")} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                     Ingresar
                 </button>
-                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 px-3" href="#">
+                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 px-3" href="/">
                     Olvidaste tu contraseña?
                 </a>
                 </div>
