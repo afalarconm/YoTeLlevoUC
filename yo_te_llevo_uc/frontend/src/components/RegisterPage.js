@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Navbar from "./Navbar.js";
-
+import Axios from 'axios';
 export default function Form() {
 
 // States for registration
@@ -37,6 +37,14 @@ const handleSubmit = (e) => {
 	setError(true);
 	} else {
 	setSubmitted(true);
+    Axios.post("https://localhost5000/Register",{
+        username: name,
+        password: password,
+        email: email,
+}).then((response) => {
+    console.log(response);
+});
+
 	setError(false);
 	}
 };
@@ -65,6 +73,17 @@ const errorMessage = () => {
 		<h1 className="text-red-500 text-xs italic">Please enter all the fields</h1>
 	</div>
 	);
+};
+
+const register = () => {
+    Axios.post("https://localhost5000/Register",{
+        username: name,
+        password: password,
+        email: email,
+}).then((response) => {
+    console.log(response);
+})
+    
 };
 
 return (
