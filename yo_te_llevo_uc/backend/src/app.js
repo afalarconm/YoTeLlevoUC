@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 
-const routes = require('/home/afalarconm/Tec. y App Web/Proyecto-IIC2513-1-grupo-23/yo_te_llevo_uc/backend/src/routes/index.js');
+const routes = require('./routes/index');
 
 const errorHandler = require('./middlewares/errors/errorHandler.js');
 const notFound = require('./middlewares/errors/notFound.js');
