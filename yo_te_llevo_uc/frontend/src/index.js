@@ -7,6 +7,7 @@ import LogedIn from "./components/LogedIn"
 import LoginPage from "./components/LoginPage"
 import ViajesPage from "./components/ViajesPage"
 import RegisterPage from "./components/RegisterPage"
+import PruebaPage from "./components/PruebaPage"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';  
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,6 +20,7 @@ root.render(
       <Route path="/Login" element={<LoginPage/>} />
       <Route path="/Viajes" element={<ViajesPage/>} />
       <Route path='/LogedIn' element={<LogedIn/>} />
+      <Route path='/Prueba' element={<PruebaPage/>} />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>

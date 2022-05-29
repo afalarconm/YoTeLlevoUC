@@ -7,7 +7,7 @@ const db = require('../../../models');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.status(200).send('Esta wea esta funcionando');
+    res.status(200).send( {message: 'Saludos desde el backend'} );
     }
 );
 
