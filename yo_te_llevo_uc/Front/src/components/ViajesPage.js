@@ -1,15 +1,30 @@
 import Navbar from "./Navbar.js";
+// import {useEffect, useState } from 'react';
+// import { response } from "../../../back/src/utils/app.js";
 
 
 
 
 export default function Form() {
+    // const{backendData, setBackendData} = useState([{}])
+
+    // useEffect(() => {
+    //     fetch("/api").then(
+    //         response => response.json()
+    //     ).then(
+    //         data => {
+    //             setBackendData(data)
+    //         }
+    //     )
+    // })
+
 
     return (
         <div className="App bg-gray-300 min-h-screen">
         <Navbar />
 
         <div class="flex-1">
+ 
     <div class="flex-1">
      
         <div class="px-4 sm:px-6 lg:px-8 py-4">
