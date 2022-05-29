@@ -6,8 +6,6 @@ const router = express.Router();
 const { User } = require("../models");
 dotenv.config();
 
-const { validateAddUserInput } = require("../utils/users");
-
 const SALT_ROUNDS = 5;
 
 

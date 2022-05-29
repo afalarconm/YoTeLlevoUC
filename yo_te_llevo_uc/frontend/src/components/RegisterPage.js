@@ -75,17 +75,6 @@ const errorMessage = () => {
 	);
 };
 
-const register = () => {
-    Axios.post("https://localhost5000/Register",{
-        username: name,
-        password: password,
-        email: email,
-}).then((response) => {
-    console.log(response);
-})
-    
-};
-
 return (
     <div className="App bg-gray-300 min-h-screen">
         <Navbar />
