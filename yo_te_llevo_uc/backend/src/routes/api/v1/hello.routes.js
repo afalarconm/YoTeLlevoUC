@@ -1,8 +1,10 @@
 const express = require('express');
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.status(200).send('Hola mundo desde express');
-  });
+    res.status(200).send('Esta wea esta funcionando');
+    }
+);
+
 module.exports = router;
- 
