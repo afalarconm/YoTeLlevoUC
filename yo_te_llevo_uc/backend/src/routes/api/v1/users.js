@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
-const { User } = require("../models");
+const User = require('../../../models');
 dotenv.config();
 
 const SALT_ROUNDS = 5;
