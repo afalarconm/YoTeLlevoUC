@@ -43,6 +43,7 @@ router.post("/register/", async (req, res) => {
           password: hashedPassword,
         });
         res.status(201).json(user);
+        // console.log(user.userName);
       }
     } else {
       res.status(400).json({ error: "Contraseñas no coinciden" });

@@ -5,9 +5,9 @@ export default function Navbar() {
     const [isNavExpanded, setIsNavExpanded] = useState(false)
     return (
       <nav className="navigation">
-        <a href="/" class="flex items-center px-3">
-            <img src="https://www.uc.cl/site/templates/dist/images/logo-uc-wh.svg" class="mr-3 h-6 sm:h-9 fill-black" alt="UC Logo" />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Yo Te Llevo UC</span>
+        <a href="/" className="flex items-center px-3">
+            <img src="https://www.uc.cl/site/templates/dist/images/logo-uc-wh.svg" className="mr-3 h-6 sm:h-9 fill-black" alt="UC Logo" />
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Yo Te Llevo UC</span>
         </a>
         <button className="hamburger"
                 onClick={() => {

@@ -65,6 +65,17 @@ const register = (e)=> {
     
 }).then((response) => {
     console.log(response);
+    if (response.status === 201) {
+        setSubmitted(true);
+        setError(false);
+        window.location.href = "/login";
+    }
+    else {
+        setSubmitted(false);
+        setError(true);
+        errorMessage(response.data.error);
+    }
+
 });
 }
 
@@ -83,14 +94,14 @@ const successMessage = () => {
 };
 
 // Showing error message if error is true
-const errorMessage = () => {
+const errorMessage = (error) => {
 	return (
 	<div
 		className="error"
 		style={{
 		display: error ? '' : 'none',
 		}}>
-		<h1 className="text-red-500 text-xs italic">Please enter all the fields</h1>
+		<h1 className="text-red-500 text-xs italic">{error}Please enter all the fields</h1>
 	</div>
 	);
 };
