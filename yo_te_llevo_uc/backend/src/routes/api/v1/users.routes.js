@@ -3,17 +3,32 @@ const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
-const User = require('../../../models');
+const { User } = require("../../../models");
 dotenv.config();
+
+const { validateAddUserInput } = require("../../../utils/users");
 
 const SALT_ROUNDS = 5;
 
+// router.post("/add-user/", async (req, res) => {
+//   if (validateAddUserInput(req.body)) {
+//     const user = await User.create({
+//       firstName: req.body.firstName,
+//       lastName: req.body.lastName,
+//       email: req.body.email,
+//       fullName: `${req.body.firstName} ${req.body.lastName}`,
+//     });
+//     res.status(201).json(user);
+//   } else {
+//     res.status(400).json({ error: "Invalid input" });
+//   }
+// });
 
-router.post("/Register/", async (req, res) => {
+router.post("/register/", async (req, res) => {
   try {
     if (req.body.password === req.body.passwordConfirmation) {
       const existingUser = await User.findOne({
-        where: { username: req.body.username },
+        where: { userName: req.body.username },
       });
       if (existingUser) {
         res.status(400).json({ error: "Username en uso" });
@@ -23,7 +38,8 @@ router.post("/Register/", async (req, res) => {
           SALT_ROUNDS
         );
         const user = await User.create({
-          username: req.body.username,
+          userName: req.body.username,
+          email: req.body.email,
           password: hashedPassword,
         });
         res.status(201).json(user);
@@ -38,7 +54,7 @@ router.post("/Register/", async (req, res) => {
 
 router.post("/login/", async (req, res) => {
   const user = await User.findOne({
-    where: { username: req.body.username },
+    where: { userName: req.body.username },
   });
   if (!user) {
     res.status(400).json({ error: "El usuario y la contraseña no coinciden" });

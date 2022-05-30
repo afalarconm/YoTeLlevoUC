@@ -7,6 +7,7 @@ export default function Form() {
 const [name, setName] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
+const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
 // States for checking the errors
 const [submitted, setSubmitted] = useState(false);
@@ -30,36 +31,43 @@ const handlePassword = (e) => {
 	setSubmitted(false);
 };
 
-// Handling the form submission
-const handleSubmit = (e) => {
-	e.preventDefault();
-	if (name === '' || email === '' || password === '') {
-	setError(true);
-	} else {
-	setSubmitted(true);
-    Axios.post("https://localhost5000/Register",{
-        username: name,
-        password: password,
-        email: email,
-}).then((response) => {
-    console.log(response);
-});
-
-	setError(false);
-	}
+const handlePasswordConfirmation = (e) => {
+    setPasswordConfirmation(e.target.value);
+    setSubmitted(false);
 };
+
+// Handling the form submission
+// const handleSubmit = (e) => {
+// 	e.preventDefault();
+// 	if (name === '' || email === '' || password === '') {
+// 	setError(true);
+// 	} else {
+// 	setSubmitted(true);
+//     Axios.post("https://localhost5000/register",{
+//         username: name,
+//         password: password,
+//         email: email,
+// }).then((response) => {
+//     console.log(response);
+// });
+
+// 	setError(false);
+// 	}
+// };
 
 const register = (e)=> {
     e.preventDefault();
-    Axios.post("http://localhost:5000/Register",{
+    Axios.post("http://localhost:5000/register",{
         username: name,
         password: password,
+        passwordConfirmation: passwordConfirmation,
         email: email,
+    
 }).then((response) => {
     console.log(response);
 });
-
 }
+
 
 // Showing success message
 const successMessage = () => {
@@ -111,6 +119,12 @@ return (
                     <label className="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
                     <input onChange={handlePassword} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     value={password} type="password" placeholder="******************" />
+                </div>
+
+                <div className="mb-6">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Confirma tu Contraseña</label>
+                    <input onChange={handlePasswordConfirmation} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    value={passwordConfirmation} type="password" placeholder="******************" />
                 </div>
 
                 <div className=" place-items-center" align='center'>
