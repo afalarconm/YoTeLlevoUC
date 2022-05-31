@@ -12,23 +12,30 @@ export default function Form() {
 
 
   const errors = {
-    uname: "invalid username",
+    username: "invalid username",
     pass: "invalid password"
   };
 
   const handleSubmit = (event) => {
     //Prevent page reload
     event.preventDefault();
-    var { uname, pass } = document.forms[0];
-    getUser(uname.value, pass.value);
+    var { username, pass } = document.forms[0];
+    getUser(username.value, pass.value);
     setIsSubmitted(true);
   };
 
-async function getUser(uname, pass) {
+async function getUser(username, pass) {
 try {
-    const response = await Axios.get('http://localhost:3000/login', {
-        params: {uname, pass}});
-    console.log(response);
+    const response = await Axios.post('http://localhost:5000/login', {
+        params: {username, pass}}
+        ).then(res => {
+            console.log(res)
+            if (res.data.token) {
+                localStorage.setItem('token', res.data.token);
+                window.location.href = '/';
+            }
+        });
+
 } catch (error) {
     console.error(error);
 }
@@ -47,8 +54,8 @@ try {
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-12 pt-2 pb-6 mb-3">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Username </label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="uname" required />
-          {renderErrorMessage("uname")}
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="username" required />
+          {renderErrorMessage("username")}
         </div>
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2" >Password </label>

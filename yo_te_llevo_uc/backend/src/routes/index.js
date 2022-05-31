@@ -14,6 +14,7 @@ router.use('/register', register)
 router.post('/register', register);
 
 router.use('/login', login)
+router.get('/login', login);
 router.post('/login', login);
 
 

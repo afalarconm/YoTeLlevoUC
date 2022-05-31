@@ -53,18 +53,21 @@ router.post("/register/", async (req, res) => {
   }
 });
 
+
 router.post("/login/", async (req, res) => {
+  console.log("aca llego",req.body.params.username);
+
   const user = await User.findOne({
-    where: { userName: req.body.username },
+    where: { userName: req.body.params.username },
   });
   if (!user) {
     res.status(400).json({ error: "El usuario y la contraseña no coinciden" });
   } else {
-    const result = bcrypt.compareSync(req.body.password, user.password);
+    const result = bcrypt.compareSync(req.body.params.pass, user.password);
     if (result) {
       const token = jwt.sign(
         {
-          username: user.username,
+          userName: user.username,
         },
         process.env.SECRET_KEY,
         {
