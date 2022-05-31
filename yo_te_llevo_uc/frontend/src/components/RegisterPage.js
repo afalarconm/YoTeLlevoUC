@@ -43,7 +43,7 @@ const handlePasswordConfirmation = (e) => {
 // 	setError(true);
 // 	} else {
 // 	setSubmitted(true);
-//     Axios.post("https://localhost5000/register",{
+//     Axios.post("https://localhost:3001/register",{
 //         username: name,
 //         password: password,
 //         email: email,
@@ -57,7 +57,7 @@ const handlePasswordConfirmation = (e) => {
 
 const register = (e)=> {
     e.preventDefault();
-    Axios.post("http://localhost:5000/register",{
+    Axios.post("http://localhost:3001/register",{
         username: name,
         password: password,
         passwordConfirmation: passwordConfirmation,

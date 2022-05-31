@@ -27,7 +27,7 @@ export default function Form() {
 
 async function getUser(username, pass) {
 try {
-    const response = await Axios.post('http://localhost:5000/login', {
+    const response = await Axios.post('http://localhost:3001/login', {
         params: {username, pass}}
         ).then(res => {
             console.log(res)
@@ -35,7 +35,7 @@ try {
                 localStorage.setItem('username', res.data.usuario);
                 localStorage.setItem('token', res.data.token);
                 console.log(res.data.token)
-                console.log(res.data.usuario.email)
+                console.log(res.data.usuario)
                 window.location.href = '/';
             }
         });

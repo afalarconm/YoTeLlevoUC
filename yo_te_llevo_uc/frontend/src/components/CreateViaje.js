@@ -56,7 +56,7 @@ const handleComentarios = (e) => {
 
 const create_viaje = (e)=> {
     e.preventDefault();
-    Axios.post("http://localhost:5000/CreateViaje",{
+    Axios.post("http://localhost:3001/CreateViaje",{
         origen: origen,
         destino: destino,
         cupos: cupos,

@@ -7,10 +7,9 @@ function App() {
   const navigate = useNavigate()
 
   const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user");
+  const user = localStorage.getItem("username");
   const [nombre, setLoginStatus] = useState("");
 
-  console.log(user);
 
     useEffect(() => {
         if (token) {
@@ -35,7 +34,7 @@ function App() {
 
         <div className="flex justify-center items-center h-4/6 flex-col">
           <h1 className="text-7xl text-white font-bold mx-auto max-w-6xl">
-            <span className="bg-gradient-to-r bg-clip-text" >Bienvenido a Yo Te Llevo UC!</span>
+            <span className="bg-gradient-to-r bg-clip-text" >Bienvenido a Yo Te Llevo UC {user}!</span>
           </h1>
           <h2 className="text-4xl text-white max-w-6xl text-left">
             <span className="bg-gradient-to-r bg-clip-text">La plataforma N1 para organizar tus turnos a la universidad</span>
