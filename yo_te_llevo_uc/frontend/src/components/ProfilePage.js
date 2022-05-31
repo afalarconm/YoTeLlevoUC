@@ -14,8 +14,8 @@ export default function Form() {
             await Axios.post('http://localhost:3001/users', { params: datos.username }
         ).then(res => {
             console.log(res)
-            setUser(res.data.username);
-            setEmail(res.data.email);
+            setUser(res.data.usuario.userName);
+            setEmail(res.data.usuario.email);
             setViajes(res.data.viajes);
         });
 
@@ -25,13 +25,13 @@ export default function Form() {
 }
 
     return (
-        fetchUser(),
+        window.onload = fetchUser(),
         
         <div className="App bg-gray-300 min-h-screen">
         <Navbar />
 
         <div className="flex justify-center py-7">
-            <div className='bg-white shadow-md rounded px-12 pt-2 pb-6 mb-3'>
+            <div className='bg-white shadow-md rounded px-12 pt-2 pb-6 mb-3 '>
             
             <div className="pl-10 pb-3">
                 <img src="https://freesvg.org/img/abstract-user-flat-4.png" alt="user" className="w-12 h-12 rounded-full mr-4" />
@@ -49,12 +49,17 @@ export default function Form() {
             </div>
 
             <div className='py-3'>
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center">Editar Perfil</button>
+                <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center"><a href='/EditProfile'> Editar Perfil</a></button>
             </div>
+            
 
 
             </div>
+            
         </div>
+            <p class="text-center text-gray-500 text-xs pb-2">
+                &copy;Tecnologías y Aplicaciones Web - Grupo 23 - 2022.
+            </p>
         </div>
     )
 }
