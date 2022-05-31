@@ -20,4 +20,8 @@ router.post('/login', login);
 
 router.use('/viajes', viajes);
 
+router.use('/CreateViaje', viajes);
+router.post('/CreateViaje', viajes);
+router.get('/CreateViaje', viajes);
+
 module.exports = router;
