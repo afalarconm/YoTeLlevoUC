@@ -3,6 +3,7 @@ import { useState } from "react";
 import "../styles/navbar.css"
 export default function Navbar() {
     const [isNavExpanded, setIsNavExpanded] = useState(false)
+
     return (
       <nav className="navigation">
         <a href="/" class="flex items-center px-3">

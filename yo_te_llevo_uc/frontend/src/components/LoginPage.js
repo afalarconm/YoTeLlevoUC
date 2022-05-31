@@ -9,6 +9,7 @@ export default function Form() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  
 
 
   const errors = {
@@ -31,7 +32,10 @@ try {
         ).then(res => {
             console.log(res)
             if (res.data.token) {
+                localStorage.setItem('username', res.data.usuario);
                 localStorage.setItem('token', res.data.token);
+                console.log(res.data.token)
+                console.log(res.data.usuario.email)
                 window.location.href = '/';
             }
         });

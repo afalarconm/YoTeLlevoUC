@@ -74,7 +74,8 @@ router.post("/login/", async (req, res) => {
           expiresIn: "1800s",
         }
       );
-      res.status(200).json({ token: token });
+      console.log(user.dataValues);
+      res.status(200).json({ usuario:user.dataV ,token: token });
     } else {
       res
         .status(400)
