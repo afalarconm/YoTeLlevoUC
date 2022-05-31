@@ -2,4 +2,16 @@
 
 ## Yo te llevo UC :computer:
 
-Quedo listo el front end de la pagina, existe un "mock log-in" para mostrar la pagina una vez iniciada la sesion.
+
+Para iniciar el servidor de backend:
+
+    sudo service postgresql start
+
+y despues:
+
+    yarn dev
+
+Para iniciar el servidor de frontend:
+
+    yarn start
+    
