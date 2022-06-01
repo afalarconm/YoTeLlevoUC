@@ -32,7 +32,62 @@ router.get('/viajes', (req, res) => {
   try {
     Viaje.findAll()
       .then(viajes => {
-        console.log(viajes)
+        res.send(viajes)
+    });
+  } catch (e) {
+    res.status(400).json({ error: e });
+  }
+});
+
+router.get('/viajes/:id', (req, res) => {
+  try {
+    let Viajeid = req.params.id
+    Viaje.findOne({
+      where: {
+        id: Viajeid
+      }
+    })
+      .then(viaje => {
+        res.send(viaje)
+    });
+  } catch (e) {
+    res.status(400).json({ error: e });
+  }
+});
+
+router.put('/viajes/:id', (req, res) => {
+  try {
+    let Viajeid = req.params.id
+    Viaje.findOne({
+      where: {
+        id: Viajeid
+      }
+    })
+    Viaje.update({
+      origen: req.body.origen,
+      destino: req.body.destino,
+      cupos: req.body.cupos,
+      hora_inicio: req.body.hora_inicio,
+      detalles: req.body.comentarios,
+    }, { where: { id: Viajeid } })
+      .then(viaje => {
+        res.send(viaje)
+    });
+  } catch (e) {
+    res.status(400).json({ error: e });
+  }
+});
+
+router.delete('/viajes/:id', (req, res) => {
+  try {
+    let Viajeid = req.params.id
+    Viaje.destroy({
+      where: {
+        id: Viajeid
+      }
+    })
+      .then(viaje => {
+        res.send(viaje)
     });
   } catch (e) {
     res.status(400).json({ error: e });
