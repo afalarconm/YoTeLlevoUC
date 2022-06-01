@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Navbar from "./Navbar.js";
 import Axios from 'axios';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 export default function Form() {
 
 // States for registration
@@ -92,7 +91,11 @@ const [post, setPost] = React.useState(null);
       .then((response) => {
         setPost(response.data);
         window.location.href = "/viajes";
-      });
+      })
+      .catch((error) => {
+          console.log(error);
+          setError(true);
+        });
   }
 
   if (!post) return "No post!"
