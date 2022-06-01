@@ -28,6 +28,9 @@ router.put('/updateUser', users);
 router.use('/viajes', viajes);
 router.get('/viajes', viajes);
 router.post('/viajes', viajes);
+router.get('/viajes/:id', viajes);
+router.put('/viajes/:id', viajes);
+router.delete('/viajes/:id', viajes);
 
 router.use('/CreateViaje', viajes);
 router.post('/CreateViaje', viajes);
