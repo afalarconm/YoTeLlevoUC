@@ -10,6 +10,7 @@ import RegisterPage from "./components/RegisterPage"
 import PruebaPage from "./components/PruebaPage"
 import CreateViaje from "./components/CreateViaje"
 import Profile from "./components/ProfilePage"
+import EditViaje from "./components/EditViaje"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';  
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,6 +26,7 @@ root.render(
       <Route path='/Prueba' element={<PruebaPage/>} />
       <Route path='/CreateViaje' element={<CreateViaje/>} />
       <Route path='/Profile' element={<Profile/>} />
+      <Route path='/EditViaje' element={<EditViaje/>} />
     </Routes>
     </BrowserRouter>
   </React.StrictMode>
