@@ -10,6 +10,7 @@ const login = require('./api/v1/login.routes');
 
 const users = require('./api/v1/users.routes');
 
+
 router.use('/hello', hello);
 
 router.use('/register', register)
@@ -21,6 +22,7 @@ router.post('/login', login);
 router.use('/users', users)
 router.post('/users', users);
 router.get('/users', users);
+router.put('/updateUser', users);
 
 
 router.use('/viajes', viajes);

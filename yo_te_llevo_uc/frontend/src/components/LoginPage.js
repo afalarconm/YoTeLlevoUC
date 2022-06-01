@@ -75,7 +75,7 @@ try {
   );
 
   return (
-    <div className="app">
+    <div className="App bg-gray-300 min-h-screen">
         <Navbar />
       <div className="flex flex-col justify-center items-center py-7">
       <h1 className='text-2xl font-bold py-2 pb-2 '>Inicia Sesión</h1>
