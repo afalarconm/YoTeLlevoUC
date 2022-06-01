@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Navbar from "./Navbar.js";
-import Axios from 'axios';
+import axios from 'axios';
 import React from 'react';
 export default function Form() {
 
@@ -44,42 +44,17 @@ const handleComentarios = (e) => {
     setSubmitted(false);
 };
 
-const [post, setPost] = React.useState(null);
+// Handling the form submission
+// const handleSubmit = (e) => {
+// 	e.preventDefault();
+// 	if (origen === '' || destino === '' || cupos === '' || hora_inicio === '' || comentarios === '') {
+// 	setError(true);
+// 	} else {
+// 	setSubmitted(true);
+// 	setError(false);
+// 	}
+// };
 
-React.useEffect(() => {
-  Axios.get("http://localhost:3001/viajes/1").then((response) => {
-    setPost(response.data);
-  });
-}, []);
-
-const handleSubmit = (e) => {
-	e.preventDefault();
-	if (origen === '' || destino === '' || cupos === '' || hora_inicio === '' || comentarios === '') {
-    setError(true)
-
-	} else {
-
-    updateViaje(origen, destino, cupos, hora_inicio, comentarios);
-                    }   
-};
-
-function updateViaje(origen, destino, cupos, hora_inicio, comentarios) {
-    Axios
-    .put("http://localhost:3001/viajes/1", {
-        origen: origen,
-        destino: destino,
-        cupos: cupos,
-        hora_inicio: hora_inicio,
-        comentarios: comentarios})
-    .then((response) => {
-        console.log(response);
-        window.location.href = "/viajes";
-    }
-    )
-    .catch((error) => {
-        console.log(error);
-    })
-    };
 // Showing success message
 const successMessage = () => {
 	return (
@@ -106,6 +81,30 @@ const errorMessage = () => {
 	);
 };
 
+const [post, setPost] = React.useState(null);
+
+  React.useEffect(() => {
+    axios.get("http://localhost:3001/viajes/1").then((response) => {
+      setPost(response.data)
+    });
+  }, []);
+
+  function updatePost() {
+    axios
+      .put("http://localhost:3001/viajes/1", {
+        origen: origen,
+        destino: destino,
+        cupos: cupos,
+        hora_inicio: hora_inicio,
+        detalles: comentarios,
+      })
+      .then((response) => {
+        setPost(response.data);
+      });
+  }
+
+  if (!post) return "No post!"
+
 return (
     <div className="App bg-gray-300 min-h-screen">
         <Navbar />
@@ -117,13 +116,13 @@ return (
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">Direccion de Origen</label>
                     <input onChange={handleOrigen} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    value={post.origen} type="text" placeholder='Origen' />
+                    value={origen} type="text" placeholder='Origen' />
                 </div>
 
                 <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2">Direccion de Destino</label>
                     <input onChange={handleDestino} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    value={post.destino} type="text" placeholder='Destino' />
+                    value={destino} type="text" placeholder='Destino' />
                 </div>
 
                 <div className="mb-4">
@@ -145,8 +144,8 @@ return (
                 </div>
 
                 <div className=" place-items-center" align='center'>
-                    <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" type="submit">
-                    Crear
+                    <button onClick={updatePost} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" type="submit">
+                    Actualizar
                     </button>
                 </div>
             </form>

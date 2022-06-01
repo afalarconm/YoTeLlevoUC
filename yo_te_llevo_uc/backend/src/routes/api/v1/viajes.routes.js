@@ -57,23 +57,21 @@ router.get('/viajes/:id', (req, res) => {
 
 router.put('/viajes/:id', (req, res) => {
   try {
-    let Viajeid = req.params.id
+    let viajeId = req.params.id
+    let nuevo_viaje = req.body
     Viaje.findOne({
       where: {
-        id: Viajeid
+        id: viajeId
       }
     })
-    Viaje.update({
-      origen: req.body.origen,
-      destino: req.body.destino,
-      cupos: req.body.cupos,
-      hora_inicio: req.body.hora_inicio,
-      detalles: req.body.comentarios,
-    }, { where: { id: Viajeid } })
       .then(viaje => {
-        res.send(viaje)
-    });
-  } catch (e) {
+        viaje.update(nuevo_viaje)
+        .then(viaje_actualizado => {
+          res.send(viaje_actualizado)
+        })
+      })
+    }
+  catch (e) {
     res.status(400).json({ error: e });
   }
 });
