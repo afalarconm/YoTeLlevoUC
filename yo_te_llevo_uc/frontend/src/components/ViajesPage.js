@@ -3,10 +3,10 @@ import Navbar from "./Navbar.js";
 // import { response } from "../../../back/src/utils/app.js";
 import Axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const baseURL = "http://localhost:3001/viajes";
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
 
 
 
@@ -22,6 +22,7 @@ export default function App() {
     //         }
     //     )
     // })
+    const navigate = useNavigate()
     const [post, setPost] = React.useState(null);
 
     React.useEffect(() => {
@@ -31,9 +32,6 @@ export default function App() {
       }, []);
 
       if (!post) return null;
-
-   
-
 
 
     const Tabla=post.map(
@@ -46,8 +44,8 @@ export default function App() {
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.hora_inicio}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.detalles}</td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            <a href="/" class="text-green-600 hover:text-green-900 px-3">Edit</a>
-                                            <a href="/" class="text-indigo-600 hover:text-indigo-900">Delete</a>
+                                            <a href="/EditViaje/" class="text-green-600 hover:text-green-900 px-3">Editar</a>
+                                            <a href="/" class="text-red-600 hover:text-red-900">Borrar</a>
              </td>
             </tr>
             )
@@ -70,7 +68,7 @@ export default function App() {
                     <p class="mt-2 text-sm text-gray-700">El listados de todos los viajes disponibles hasta el momento.</p>
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                    <button type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Añadir viaje</button>
+                    <button type="button" onClick={() => navigate("/CreateViaje")} class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Añadir viaje</button>
                 </div>
             </div>
             <div class="mt-8 flex flex-col">

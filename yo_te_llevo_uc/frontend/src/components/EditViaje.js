@@ -111,7 +111,7 @@ return (
         <div className="flex justify-center items-center py-7 ">
 
             <form className='bg-white shadow-md rounded px-12 pt-2 pb-6 mb-3 '>
-                <h1 className='text-2xl font-bold py-2 pb-2'>Crea un nuevo Viaje</h1>
+                <h1 className='text-2xl font-bold py-2 pb-2'>Edita tu viaje</h1>
                 {/* Labels and inputs for form data */}
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">Direccion de Origen</label>
