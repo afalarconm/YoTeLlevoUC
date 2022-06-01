@@ -29,9 +29,7 @@ function App() {
     <div className="App">
       <Navbar />
       <section className="w-full h-screen bg-hero bg-cover bg-center">
-        <div >
-          {user}
-        </div>
+    
 
 
         <div className="flex justify-center items-center h-4/6 flex-col">

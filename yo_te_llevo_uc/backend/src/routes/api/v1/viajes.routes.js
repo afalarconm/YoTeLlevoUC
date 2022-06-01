@@ -85,7 +85,7 @@ router.delete('/viajes/:id', (req, res) => {
       }
     })
       .then(viaje => {
-        res.send(viaje)
+        res.status(200).json({ message: 'Viaje eliminado' })
     });
   } catch (e) {
     res.status(400).json({ error: e });

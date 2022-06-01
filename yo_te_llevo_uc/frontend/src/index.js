@@ -26,7 +26,7 @@ root.render(
       <Route path='/Prueba' element={<PruebaPage/>} />
       <Route path='/CreateViaje' element={<CreateViaje/>} />
       <Route path='/Profile' element={<Profile/>} />
-      <Route path='/EditViaje' element={<EditViaje/>} />
+      <Route path='/EditViaje/:id' element={<EditViaje/>} />
       <Route path='/EditProfile' element={<EditProfile/>} />
 
     </Routes>

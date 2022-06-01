@@ -42,6 +42,7 @@ try {
 
 } catch (error) {
     console.error(error);
+    setIsSubmitted(false);
 }
 }
 

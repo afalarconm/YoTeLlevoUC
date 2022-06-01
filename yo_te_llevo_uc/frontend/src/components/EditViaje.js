@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Navbar from "./Navbar.js";
-import axios from 'axios';
+import Axios from 'axios';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 export default function Form() {
 
 // States for registration
@@ -14,6 +15,8 @@ const [comentarios, setComentarios] = useState('');
 // States for checking the errors
 const [submitted, setSubmitted] = useState(false);
 const [error, setError] = useState(false);
+
+const id_viaje = localStorage.getItem('id_viaje');
 
 // Handling the name change
 const handleOrigen = (e) => {
@@ -44,17 +47,6 @@ const handleComentarios = (e) => {
     setSubmitted(false);
 };
 
-// Handling the form submission
-// const handleSubmit = (e) => {
-// 	e.preventDefault();
-// 	if (origen === '' || destino === '' || cupos === '' || hora_inicio === '' || comentarios === '') {
-// 	setError(true);
-// 	} else {
-// 	setSubmitted(true);
-// 	setError(false);
-// 	}
-// };
-
 // Showing success message
 const successMessage = () => {
 	return (
@@ -84,14 +76,13 @@ const errorMessage = () => {
 const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get("http://localhost:3001/viajes/1").then((response) => {
+    Axios.get("http://localhost:3001/viajes/").then((response) => {
       setPost(response.data)
     });
   }, []);
 
   function updatePost() {
-    axios
-      .put("http://localhost:3001/viajes/1", {
+      Axios.put(`http://localhost:3001/viajes/${id_viaje}`, {
         origen: origen,
         destino: destino,
         cupos: cupos,
@@ -100,6 +91,7 @@ const [post, setPost] = React.useState(null);
       })
       .then((response) => {
         setPost(response.data);
+        window.location.href = "/viajes";
       });
   }
 

@@ -68,7 +68,7 @@ const create_viaje = (e)=> {
     if (response.status === 201) {
         setSubmitted(true);
         setError(false);
-        window.location.href = "/CreateViaje";
+        window.location.href = "/Viajes";
     }
     else {
         setSubmitted(false);

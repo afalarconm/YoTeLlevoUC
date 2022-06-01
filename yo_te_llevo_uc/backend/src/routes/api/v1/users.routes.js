@@ -45,4 +45,21 @@ router.put("/updateUser/", async (req, res) => {
   }
 });
 
+router.delete('/DeleteUser/:id', (req, res) => {
+  console.log("el body", req.params);
+  try {
+    let UserName = req.params.id;
+    User.destroy({
+      where: {
+        userName: UserName
+      }
+    })
+      .then(user => {
+        res.status(200).json({ message: 'Usuario eliminado' })
+    });
+  } catch (e) {
+    res.status(400).json({ error: e });
+  }
+});
+
 module.exports = router;

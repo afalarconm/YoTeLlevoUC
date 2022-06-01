@@ -23,6 +23,7 @@ router.use('/users', users)
 router.post('/users', users);
 router.get('/users', users);
 router.put('/updateUser', users);
+router.delete('/DeleteUser/:username', users);
 
 
 router.use('/viajes', viajes);
