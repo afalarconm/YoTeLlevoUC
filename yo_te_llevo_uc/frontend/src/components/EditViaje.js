@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Navbar from "./Navbar.js";
 import Axios from 'axios';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 export default function Form() {
 
 // States for registration
@@ -11,6 +11,13 @@ const [destino, setDestino] = useState('');
 const [cupos, setCupos] = useState('');
 const [hora_inicio, setHoraInicio] = useState('');
 const [comentarios, setComentarios] = useState('');
+const { currentUser } = useAuth();
+
+if (!currentUser) {
+    alert('Debes iniciar sesion para crear un viaje!');
+    window.location.href = '/login';
+}
+
 
 // States for checking the errors
 const [submitted, setSubmitted] = useState(false);
@@ -82,17 +89,28 @@ const [post, setPost] = React.useState(null);
   }, []);
 
   function updatePost() {
-      Axios.put(`http://localhost:3001/viajes/${id_viaje}`, {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${currentUser.token}`
+        }
+    };
+    const data = {
         origen: origen,
         destino: destino,
         cupos: cupos,
         hora_inicio: hora_inicio,
-        detalles: comentarios,
-      })
-      .then((response) => {
-        setPost(response.data);
-        window.location.href = "/viajes";
-      });
+        detalles: comentarios
+    };
+    Axios.put(`http://localhost:3001/viajes/${id_viaje}`, data, requestOptions)
+        .then(response => {
+            console.log(response);
+            window.location.href = '/Viajes';
+        }
+        ).catch(error => {
+            console.log(error);
+        }
+        );
   }
 
   if (!post) return "No post!"

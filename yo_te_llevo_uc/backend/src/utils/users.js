@@ -14,5 +14,5 @@ const validateAddUserInput = (body) => {
   );
 };
   
-  module.exports = { validateAddUserInput };
+module.exports = { validateAddUserInput };
   
