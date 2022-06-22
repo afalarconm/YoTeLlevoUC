@@ -35,8 +35,10 @@ export default function App() {
 
 
     // agregar al usuario como pasajero del viaje
-    const agregarPasajero = (id_viaje) => {
-        //agregar logica de esta wea xd
+    const agregarPasajero = (viaje) => {
+        
+        viaje.Pasajeros.push(currentUser.id)
+
         const requestOptions = {
             method: 'PUT',
             headers: {
@@ -44,9 +46,15 @@ export default function App() {
             }
         };
         const data = {
-            Pasajeros: currentUser.id
+            origen: viaje.origen,
+            destino: viaje.destino,
+            cupos: viaje.cupos,
+            hora_inicio: viaje.hora_inicio,
+            detalles: viaje.detalles,
+            Precio: viaje.Precio,
+            Pasajeros: viaje.Pasajeros
         };
-        Axios.put(`http://localhost:3001/viajes/join/${id_viaje}`, data, requestOptions)
+        Axios.put(`http://localhost:3001/viajes/join/${viaje.id}`, data, requestOptions)
         .then(response => {
             console.log(response.data);
             window.location.reload()
@@ -74,10 +82,9 @@ export default function App() {
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.hora_inicio}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.detalles}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >${info.Precio}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.Pasajeros}</td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                <button onClick={() => agregarPasajero(info.id)} className="focus:outline-none text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-teal-500 dark:hover:bg-teal-600 dark:focus:ring-teal-800">Unirme!</button>
-                <button onClick={() => verViaje(info.id)} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:focus:ring-cyan-800">Ver detalles</button>
+                <button onClick={() => agregarPasajero(info)} style={{display: info.Pasajeros.includes(currentUser.id)? "none": ""}}  className="focus:outline-none text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-teal-500 dark:hover:bg-teal-600 dark:focus:ring-teal-800">Unirme!</button>
+                <button onClick={() => verViaje(info.id)} style={{display: info.Pasajeros.includes(currentUser.id)? "": "none"}} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:focus:ring-cyan-800">Ver detalles</button>
 
              </td>
             </tr>
@@ -117,7 +124,6 @@ export default function App() {
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Hora de Inicio</th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Comentarios</th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Precio Individual</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Pasajeros</th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                         <span class="sr-only" >Edit</span>
                                     </th>

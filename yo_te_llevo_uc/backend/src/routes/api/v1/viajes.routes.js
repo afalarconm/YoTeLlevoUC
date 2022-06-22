@@ -18,7 +18,7 @@ router.post("/CreateViaje/", async (req, res) => {
           cupos: req.body.cupos,
           hora_inicio: req.body.hora_inicio,
           Precio: req.body.precio,
-          Pasajeros: [0],
+          Pasajeros: [],
           detalles: req.body.comentarios,
           activo: true,
         });
@@ -97,28 +97,26 @@ router.delete('/viajes/:id', (req, res) => {
 
 // añadir pasajeros al viaje
 router.put('/viajes/join/:id', (req, res) => {
-  console.log(req.body.Pasajeros)
+  console.log(req.body)
   try {
     let viajeId = req.params.id
-    let nuevo_pasajero = req.body.Pasajeros
+    let nuevo_viaje = req.body
     Viaje.findOne({
       where: {
         id: viajeId
       }
     })
-    .then(viaje => {
-      viaje.Pasajeros.push(nuevo_pasajero)
-      viaje.save()
-      .then(viaje_actualizado => {
-        console.log(viaje_actualizado)
-        res.send(viaje_actualizado)
+      .then(viaje => {
+        viaje.update(nuevo_viaje)
+        .then(viaje_actualizado => {
+          res.send(viaje_actualizado)
+        })
       })
-    })
-  } catch (e) {
+    }
+  catch (e) {
     res.status(400).json({ error: e });
   }
 });
-
 
 
 
