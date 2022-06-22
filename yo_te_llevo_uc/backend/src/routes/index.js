@@ -22,6 +22,7 @@ router.post('/viajes', viajes);
 router.use('/viajes/:id', authorization, viajes)
 router.get('/viajes/:id', viajes);
 router.put('/viajes/:id', viajes);
+router.put('/viajes/join/:id', authorization, viajes)
 router.delete('/viajes/:id', authorization, viajes);
 
 router.use('/CreateViaje', authorization, viajes);

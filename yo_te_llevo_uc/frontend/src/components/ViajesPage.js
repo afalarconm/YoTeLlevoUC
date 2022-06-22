@@ -22,18 +22,6 @@ export default function App() {
         setUser(currentUser)
     }, [currentUser]);
 
-
-    // const{backendData, setBackendData} = useState([{}])
-
-    // useEffect(() => {
-    //     fetch("/api").then(
-    //         response => response.json()
-    //     ).then(
-    //         data => {
-    //             setBackendData(data)
-    //         }
-    //     )
-    // })
     const navigate = useNavigate()
     const [post, setPost] = useState(null);
 
@@ -45,25 +33,34 @@ export default function App() {
 
       if (!post) return null;
 
-    const editViaje = (id) => {
-        localStorage.setItem('id_viaje', id)
-        navegar(`/EditViaje/${id}`)
-    }
 
-    const deleteViaje = (id) => {
+    // agregar al usuario como pasajero del viaje
+    const agregarPasajero = (id_viaje) => {
+        //agregar logica de esta wea xd
         const requestOptions = {
-            method: 'DELETE',
+            method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${currentUser.token}`
-            }};
-        Axios.delete(`http://localhost:3001/viajes/${id}`, requestOptions)
-            .then(response => {
-                console.log(response);
-                window.location.href = '/Viajes';
-            })
+            }
+        };
+        const data = {
+            Pasajeros: currentUser.id
+        };
+        Axios.put(`http://localhost:3001/viajes/join/${id_viaje}`, data, requestOptions)
+        .then(response => {
+            console.log(response.data);
+            window.location.reload()
+        }
+        ).catch(error => {
+            console.log(error);
+        }
+        );
     }
 
-    
+    // ir a pagina del viaje
+    const verViaje = (id) => {
+        navegar(`/ViajeDetails/${id}`)
+    }
 
 
     const Tabla=post.map(
@@ -76,10 +73,11 @@ export default function App() {
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.cupos}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.hora_inicio}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.detalles}</td>
-
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >${info.Precio}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.Pasajeros}</td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                <button onClick={() => editViaje(info.id)} style={{display: currentUser ? "": "none"}}  className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Editar</button>
-                <button onClick={() => deleteViaje(info.id)} style={{display: currentUser ? "": "none"}}  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
+                <button onClick={() => agregarPasajero(info.id)} className="focus:outline-none text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-teal-500 dark:hover:bg-teal-600 dark:focus:ring-teal-800">Unirme!</button>
+                <button onClick={() => verViaje(info.id)} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:focus:ring-cyan-800">Ver detalles</button>
 
              </td>
             </tr>
@@ -118,6 +116,8 @@ export default function App() {
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cupos</th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Hora de Inicio</th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Comentarios</th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Precio Individual</th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Pasajeros</th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                                         <span class="sr-only" >Edit</span>
                                     </th>

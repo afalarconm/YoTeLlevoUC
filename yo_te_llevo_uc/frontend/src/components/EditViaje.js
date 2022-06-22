@@ -11,6 +11,7 @@ const [destino, setDestino] = useState('');
 const [cupos, setCupos] = useState('');
 const [hora_inicio, setHoraInicio] = useState('');
 const [comentarios, setComentarios] = useState('');
+const [precio, setPrecio] = useState('');
 const { currentUser } = useAuth();
 
 if (!currentUser) {
@@ -51,6 +52,11 @@ const handleHoraInicio = (e) => {
 
 const handleComentarios = (e) => {
     setComentarios(e.target.value);
+    setSubmitted(false);
+};
+
+const handlePrecio = (e) => {
+    setPrecio(e.target.value);
     setSubmitted(false);
 };
 
@@ -151,6 +157,12 @@ return (
                     <label className="block text-gray-700 text-sm font-bold mb-2">Detalles del Viaje</label>
                     <input onChange={handleComentarios} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     value={comentarios} type="text" placeholder="Detalles del viaje" contentEditable='true'/>
+                </div>
+
+                <div className="mb-6">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Precio Individual</label>
+                    <input onChange={handlePrecio} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    value={precio} type="text" placeholder="Precio por pasajero" contentEditable='true'/>
                 </div>
 
                 <div className=" place-items-center" align='center'>

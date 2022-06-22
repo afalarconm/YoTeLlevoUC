@@ -12,6 +12,7 @@ const [destino, setDestino] = useState('');
 const [cupos, setCupos] = useState('');
 const [hora_inicio, setHoraInicio] = useState('');
 const [comentarios, setComentarios] = useState('');
+const [precio, setPrecio] = useState('')
 const { currentUser } = useAuth();
 
 // States for checking the errors
@@ -54,6 +55,12 @@ const handleComentarios = (e) => {
     setSubmitted(false);
 };
 
+const handlePrecio = (e) => {
+    setPrecio(e.target.value)
+    setSubmitted(false)
+}
+
+
 // Handling the form submission
 // const handleSubmit = (e) => {
 // 	e.preventDefault();
@@ -67,7 +74,7 @@ const handleComentarios = (e) => {
 
 const create_viaje = (e)=> {
     e.preventDefault();
-    if (origen === '' || destino === '' || cupos === '' || hora_inicio === '' || comentarios === '') {
+    if (origen === '' || destino === '' || cupos === '' || hora_inicio === '' || comentarios === '' || precio === '') {
         setError(true);
     }
     else {
@@ -81,7 +88,8 @@ const create_viaje = (e)=> {
             destino: destino,
             cupos: cupos,
             hora_inicio: hora_inicio,
-            comentarios: comentarios
+            comentarios: comentarios,
+            precio: precio
         };
         Axios.post('http://localhost:3001/CreateViaje', data, requestOptions)
             .then(response => {
@@ -148,6 +156,12 @@ return (
                     <label className="block text-gray-700 text-sm font-bold mb-2">Cupos Disponibles</label>
                     <input onChange={handleCupos} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     value={cupos} type="text" placeholder="Cupos" />
+                </div>
+
+                <div className="mb-6">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Precio por pasajero</label>
+                    <input onChange={handlePrecio} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    value={precio} type="text" placeholder="$1000" />
                 </div>
 
                 <div className="mb-6">

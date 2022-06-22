@@ -11,6 +11,7 @@ import CreateViaje from "./components/CreateViaje"
 import Profile from "./components/ProfilePage"
 import EditViaje from "./components/EditViaje"
 import EditProfile from "./components/EditProfile"
+import ViajeDetails from './components/ViajeDetails';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';  
 import AuthContextProvider from './contexts/AuthContext';
@@ -30,6 +31,7 @@ root.render(
           <Route path='/Profile' element={<Profile/>} />
           <Route path='/EditViaje/:id' element={<EditViaje/>} />
           <Route path='/EditProfile' element={<EditProfile/>} />
+          <Route path='/ViajeDetails/:id' element={<ViajeDetails/>} />
 
         </Routes>
       </AuthContextProvider>

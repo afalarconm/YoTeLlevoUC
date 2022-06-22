@@ -19,7 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     cupos: DataTypes.INTEGER,
     hora_inicio: DataTypes.DATE,
     detalles: DataTypes.STRING,
-    activo: DataTypes.BOOLEAN
+    activo: DataTypes.BOOLEAN,
+    Pasajeros: DataTypes.ARRAY(DataTypes.INTEGER),
+    Precio: DataTypes.INTEGER
+    
   }, {
     sequelize,
     modelName: 'Viaje',
