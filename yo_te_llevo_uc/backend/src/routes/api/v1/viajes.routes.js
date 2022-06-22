@@ -21,6 +21,7 @@ router.post("/CreateViaje/", async (req, res) => {
           Pasajeros: [],
           detalles: req.body.comentarios,
           activo: true,
+          UserId: req.body.UserId
         });
         res.status(201).json(viaje);
         } else {

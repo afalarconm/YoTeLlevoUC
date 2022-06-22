@@ -84,7 +84,7 @@ const ViajeDetails = () => {
                 <label className="block text-gray-700 text-medium font-bold mb-2">Hora: {viaje.hora_inicio}</label>
             </div>
             <div className="mb-4">
-                <label className="block text-gray-700 text-medium font-bold mb-2">Precio: ${viaje.precio}</label>
+                <label className="block text-gray-700 text-medium font-bold mb-2">Precio: ${viaje.Precio}</label>
             </div>
             <div className="mb-4">
                 <label className="block text-gray-700 text-medium font-bold mb-2">Detalles: {viaje.detalles}</label>
@@ -92,8 +92,8 @@ const ViajeDetails = () => {
 
             <div className='py-3'>
                 <button className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center"><a href='/Viajes'>Volver</a></button>
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => editViaje(id)} style={{display: currentUser ? "": "none"}} > Editar Viaje</button>
-                <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => deleteViaje(id)} style={{display: currentUser ? "": "none"}}>Eliminar</button>
+                <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => editViaje(id)} style={{display: currentUser.id === viaje.UserId ? "": "none"}} > Editar Viaje</button>
+                <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => deleteViaje(id)} style={{display: currentUser.id === viaje.UserId ? "": "none"}}>Eliminar</button>
             </div>
             
 

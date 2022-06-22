@@ -89,7 +89,8 @@ const create_viaje = (e)=> {
             cupos: cupos,
             hora_inicio: hora_inicio,
             comentarios: comentarios,
-            precio: precio
+            precio: precio,
+            UserId: currentUser.id
         };
         Axios.post('http://localhost:3001/CreateViaje', data, requestOptions)
             .then(response => {

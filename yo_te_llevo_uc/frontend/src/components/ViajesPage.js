@@ -1,6 +1,6 @@
 import Navbar from "./Navbar.js";
 // import {useEffect, useState } from 'react';
-// import { response } from "../../../back/src/utils/app.js";
+import dateFormat, { masks } from "dateformat";
 import Axios from "axios";  
 import { useState, useEffect} from "react";
 import useAuth from '../hooks/useAuth';
@@ -38,6 +38,7 @@ export default function App() {
     const agregarPasajero = (viaje) => {
         
         viaje.Pasajeros.push(currentUser.id)
+        viaje.cupos -= 1
 
         const requestOptions = {
             method: 'PUT',
@@ -79,12 +80,13 @@ export default function App() {
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6" key={info.id} >{info.origen}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{info.destino}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.cupos}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.hora_inicio}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{dateFormat(info.hora_inicio, "dd, mm dS,h:MM TT")}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.detalles}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >${info.Precio}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" style={{display: info.cupos === 0 ? "Lleno":""}} >${info.Precio}</td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                <button onClick={() => agregarPasajero(info)} style={{display: info.Pasajeros.includes(currentUser.id)? "none": ""}}  className="focus:outline-none text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-teal-500 dark:hover:bg-teal-600 dark:focus:ring-teal-800">Unirme!</button>
+                <button onClick={() => agregarPasajero(info)} style={{display: info.Pasajeros.includes(currentUser.id)||info.UserId === currentUser.id || info.cupos === 0 ? "none": ""}}  className="focus:outline-none text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-teal-500 dark:hover:bg-teal-600 dark:focus:ring-teal-800">Unirme!</button>
                 <button onClick={() => verViaje(info.id)} style={{display: info.Pasajeros.includes(currentUser.id)? "": "none"}} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:focus:ring-cyan-800">Ver detalles</button>
+                <button onClick={() => verViaje(info.id)} style={{display: info.UserId === currentUser.id? "": "none"}} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-500 dark:hover:bg-orange-600 dark:focus:ring-orange-800">Ver mi Viaje</button>
 
              </td>
             </tr>

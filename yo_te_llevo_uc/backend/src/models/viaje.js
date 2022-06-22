@@ -11,8 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Viaje.belongsTo(models.User, {
+        as: 'user',
+        foreignKey: 'UserId'
+      }
+      );
+
+      sequelize.sync({ alter: true }).then(() => {
+
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
     }
-  }
   Viaje.init({
     origen: DataTypes.STRING,
     destino: DataTypes.STRING,
@@ -21,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     detalles: DataTypes.STRING,
     activo: DataTypes.BOOLEAN,
     Pasajeros: DataTypes.ARRAY(DataTypes.INTEGER),
-    Precio: DataTypes.INTEGER
+    Precio: DataTypes.INTEGER,
+    UserId: DataTypes.INTEGER
     
   }, {
     sequelize,
