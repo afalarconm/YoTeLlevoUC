@@ -5,6 +5,7 @@ const hello  = require('./api/v1/hello.routes');
 const viajes = require('./api/v1/viajes.routes');
 const auth = require('./api/v1/auth.routes');
 const users = require('./api/v1/users.routes');
+const review = require('./api/v1/review.routes');
 
 
 const authorization = require('../middlewares/auth');
@@ -14,6 +15,8 @@ router.use('/hello', hello);
 router.use('/auth', auth);
 
 router.use('/users', authorization, users);
+
+router.use('/review', authorization, review);
 
 
 router.use('/viajes', viajes);

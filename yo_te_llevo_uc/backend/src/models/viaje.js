@@ -17,12 +17,12 @@ module.exports = (sequelize, DataTypes) => {
       }
       );
 
-      sequelize.sync({ alter: true }).then(() => {
-
-        }).catch((err) => {
-          console.log(err);
-        })
+      Viaje.hasMany(models.Review, {
+        as: 'reviews',
       }
+      );
+      }
+  
     }
   Viaje.init({
     origen: DataTypes.STRING,

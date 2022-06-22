@@ -1,10 +1,10 @@
 import Navbar from "./Navbar.js";
 // import {useEffect, useState } from 'react';
-import dateFormat, { masks } from "dateformat";
+import dateFormat from "dateformat";
 import Axios from "axios";  
 import { useState, useEffect} from "react";
 import useAuth from '../hooks/useAuth';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -37,13 +37,13 @@ export default function App() {
     // agregar al usuario como pasajero del viaje
     const agregarPasajero = (viaje) => {
         
-        viaje.Pasajeros.push(currentUser.id)
+        viaje.Pasajeros.push(user.id)
         viaje.cupos -= 1
 
         const requestOptions = {
             method: 'PUT',
             headers: {
-                'Authorization': `Bearer ${currentUser.token}`
+                'Authorization': `Bearer ${user.token}`
             }
         };
         const data = {
@@ -74,13 +74,12 @@ export default function App() {
 
     const Tabla=post.map(
         (info)=>{
-            const id_viaje = "/EditViaje/"+info.id
             return(
                 <tr>
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6" key={info.id} >{info.origen}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{info.destino}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.cupos}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{dateFormat(info.hora_inicio, "dd, mm dS,h:MM TT")}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{dateFormat(info.hora_inicio, "dd/mm/yy h:MM TT")}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.detalles}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" style={{display: info.cupos === 0 ? "Lleno":""}} >${info.Precio}</td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
