@@ -1,8 +1,12 @@
-import { useState } from 'react';
-import Navbar from "./Navbar.js";
+import Navbar from './Navbar';
+import { useState, useEffect } from 'react';
+import useAuth from '../hooks/useAuth';
 import Axios from 'axios';
-export default function Form() {
+import { AuthContext } from '../contexts/AuthContext';
 
+export default function Form() {
+    const [user, setUser] = useState([]);
+    const { currentUser } = useAuth();
 // States for registration
 const [name, setName] = useState('');
 const [email, setEmail] = useState('');
@@ -57,7 +61,7 @@ const handlePasswordConfirmation = (e) => {
 
 const register = (e)=> {
     e.preventDefault();
-    Axios.post("http://localhost:3001/register",{
+    Axios.post("http://localhost:3001/auth/signup",{
         username: name,
         password: password,
         passwordConfirmation: passwordConfirmation,
@@ -68,7 +72,9 @@ const register = (e)=> {
     if (response.status === 201) {
         setSubmitted(true);
         setError(false);
-        window.location.href = "/login";
+        setUser(response.data);
+        AuthContext.handleUserLogin(response.data);
+        window.location.href = "/";
     }
     else {
         setSubmitted(false);
@@ -78,6 +84,8 @@ const register = (e)=> {
 
 });
 }
+
+
 
 
 // Showing success message

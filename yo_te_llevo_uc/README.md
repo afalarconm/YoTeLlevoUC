@@ -15,3 +15,6 @@ Para iniciar el servidor de frontend:
 
     yarn start
     
+Para entrar a la base de datos
+
+    sudo -u postgres psql

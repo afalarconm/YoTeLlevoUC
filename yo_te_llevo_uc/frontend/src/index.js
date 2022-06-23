@@ -11,25 +11,30 @@ import CreateViaje from "./components/CreateViaje"
 import Profile from "./components/ProfilePage"
 import EditViaje from "./components/EditViaje"
 import EditProfile from "./components/EditProfile"
+import ViajeDetails from './components/ViajeDetails';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';  
+import AuthContextProvider from './contexts/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<LandingPage/>} />
-      <Route path='/Register' element={<RegisterPage/>} />
-      <Route path="/Login" element={<LoginPage/>} />
-      <Route path="/Viajes" element={<ViajesPage/>} />
-      <Route path='/Prueba' element={<PruebaPage/>} />
-      <Route path='/CreateViaje' element={<CreateViaje/>} />
-      <Route path='/Profile' element={<Profile/>} />
-      <Route path='/EditViaje/:id' element={<EditViaje/>} />
-      <Route path='/EditProfile' element={<EditProfile/>} />
+      <AuthContextProvider>
+        <Routes>
+          <Route path="/" element={<LandingPage/>} />
+          <Route path='/Register' element={<RegisterPage/>} />
+          <Route path="/Login" element={<LoginPage/>} />
+          <Route path="/Viajes" element={<ViajesPage/>} />
+          <Route path='/Prueba' element={<PruebaPage/>} />
+          <Route path='/CreateViaje' element={<CreateViaje/>} />
+          <Route path='/Profile' element={<Profile/>} />
+          <Route path='/EditViaje/:id' element={<EditViaje/>} />
+          <Route path='/EditProfile' element={<EditProfile/>} />
+          <Route path='/ViajeDetails/:id' element={<ViajeDetails/>} />
 
-    </Routes>
+        </Routes>
+      </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

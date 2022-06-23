@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import Navbar from "./Navbar.js";
 import ReactDOM from "react-dom";
 import Axios from "axios";
+import { AuthContext } from "../contexts/AuthContext.jsx";
 
 
 
-export default function Form() {
+function LoginPage() {
+
+  const authContext = React.useContext(AuthContext);
+
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -27,18 +31,12 @@ export default function Form() {
 
 async function getUser(username, pass) {
 try {
-    const response = await Axios.post('http://localhost:3001/login', {
-        params: {username, pass}}
-        ).then(res => {
-            console.log(res)
-            if (res.data.token) {
-                localStorage.setItem('username', res.data.usuario);
-                localStorage.setItem('token', res.data.token);
-                console.log(res.data.token)
-                console.log(res.data.usuario)
-                window.location.href = '/';
-            }
-        });
+    Axios.post('http://localhost:3001/auth/login', {params: {username, pass}}
+      ).then(res => {
+            console.log(res.data)
+            authContext.handleUserLogin(res.data);
+            window.location.href = "/";
+      });
 
 } catch (error) {
     console.error(error);
@@ -88,3 +86,5 @@ try {
     </div>
   );
 }
+
+export default LoginPage;

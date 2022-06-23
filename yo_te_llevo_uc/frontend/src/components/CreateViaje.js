@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import Navbar from "./Navbar.js";
 import Axios from 'axios';
+import useAuth from '../hooks/useAuth';
+
+
 export default function Form() {
 
 // States for registration
@@ -9,10 +12,19 @@ const [destino, setDestino] = useState('');
 const [cupos, setCupos] = useState('');
 const [hora_inicio, setHoraInicio] = useState('');
 const [comentarios, setComentarios] = useState('');
+const [precio, setPrecio] = useState('')
+const { currentUser } = useAuth();
 
 // States for checking the errors
 const [submitted, setSubmitted] = useState(false);
 const [error, setError] = useState(false);
+
+
+if (!currentUser) {
+    alert('Debes iniciar sesion para editar un viaje!');
+    window.location.href = '/login';
+}
+
 
 // Handling the name change
 const handleOrigen = (e) => {
@@ -43,6 +55,12 @@ const handleComentarios = (e) => {
     setSubmitted(false);
 };
 
+const handlePrecio = (e) => {
+    setPrecio(e.target.value)
+    setSubmitted(false)
+}
+
+
 // Handling the form submission
 // const handleSubmit = (e) => {
 // 	e.preventDefault();
@@ -56,28 +74,33 @@ const handleComentarios = (e) => {
 
 const create_viaje = (e)=> {
     e.preventDefault();
-    Axios.post("http://localhost:3001/CreateViaje",{
-        origen: origen,
-        destino: destino,
-        cupos: cupos,
-        hora_inicio: hora_inicio,
-        comentarios: comentarios,
-    
-}).then((response) => {
-    console.log(response);
-    if (response.status === 201) {
-        setSubmitted(true);
-        setError(false);
-        window.location.href = "/Viajes";
+    if (origen === '' || destino === '' || cupos === '' || hora_inicio === '' || comentarios === '' || precio === '') {
+        setError(true);
     }
     else {
-        setSubmitted(false);
-        setError(true);
-        errorMessage(response.data.error);
-    }
-
-});
-}
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${currentUser.token}`
+            }};
+        const data = {
+            origen: origen,
+            destino: destino,
+            cupos: cupos,
+            hora_inicio: hora_inicio,
+            comentarios: comentarios,
+            precio: precio,
+            UserId: currentUser.id
+        };
+        Axios.post('http://localhost:3001/CreateViaje', data, requestOptions)
+            .then(response => {
+                console.log(response);
+                window.location.href = '/viajes';
+            }
+            ).catch(error => {
+                console.log(error);
+            });        
+    }}
 // Showing success message
 const successMessage = () => {
 	return (
@@ -107,7 +130,7 @@ const errorMessage = () => {
 return (
     <div className="App bg-gray-300 min-h-screen">
         <Navbar />
-        <div className="flex justify-center items-center py-7 ">
+        <div className="flex justify-center items-center py-7 " >
 
             <form className='bg-white shadow-md rounded px-12 pt-2 pb-6 mb-3 '>
                 <h1 className='text-2xl font-bold py-2 pb-2'>Crea un nuevo Viaje</h1>
@@ -134,6 +157,12 @@ return (
                     <label className="block text-gray-700 text-sm font-bold mb-2">Cupos Disponibles</label>
                     <input onChange={handleCupos} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     value={cupos} type="text" placeholder="Cupos" />
+                </div>
+
+                <div className="mb-6">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Precio por pasajero</label>
+                    <input onChange={handlePrecio} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    value={precio} type="text" placeholder="$1000" />
                 </div>
 
                 <div className="mb-6">
@@ -165,3 +194,4 @@ return (
 );
 
 }
+

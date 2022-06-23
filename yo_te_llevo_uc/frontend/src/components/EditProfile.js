@@ -1,16 +1,25 @@
-import { useState } from 'react';
+import React, { useState } from "react";
 import Navbar from "./Navbar.js";
 import Axios from 'axios';
+import useAuth from '../hooks/useAuth';
+import { AuthContext } from "../contexts/AuthContext.jsx";
+
+
 export default function Form() {
+
+
+
 
 // States for registration
 const [name, setName] = useState(localStorage.getItem('username'));
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [passwordConfirmation, setPasswordConfirmation] = useState('');
+const { currentUser } = useAuth();
 
 // States for checking the errors
 
+const authContext = React.useContext(AuthContext);
 
 
 // Handling the name change
@@ -37,7 +46,7 @@ const handlePasswordConfirmation = (e) => {
 // Handling the form submission
 const handleSubmit = (e) => {
 	e.preventDefault();
-	if (name === '' || email === '' || password === '') {
+	if (password === '') {
 
 	} else {
 
@@ -51,35 +60,43 @@ const handleDelete = (e) => {
 }
 
 function deleteUser() {
-    Axios.delete(`http://localhost:3001/DeleteUser/${localStorage.getItem('username')}`)
+    const requestOptions = {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${currentUser.token}`
+        }
+    };
+    Axios.delete(`http://localhost:3001/users/${currentUser.id}`, requestOptions)
+        .then(response => {
+            console.log(response);
+            authContext.handleUserLogout();
+        });
+}
+
+function updateUser(name, email, password, passwordConfirmation) {
+    const requestOptions = {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${currentUser.token}`
+        }
+    };
+    const data = {
+        userName: name || currentUser.username,
+        email: email || currentUser.email,
+        password: password,
+        passwordConfirmation: passwordConfirmation
+    }
+    Axios.patch(`http://localhost:3001/users/${currentUser.id}`, data, requestOptions)
     .then(res => {
         console.log(res);
         console.log(res.data);
-        localStorage.clear();
-        window.location.href = '/';
+        window.location.href = '/Profile';
     })
     .catch(err => {
         console.log(err);
     })
 }
 
-function updateUser(name, email, password, passwordConfirmation) {
-    Axios
-    .put("http://localhost:3001/updateUser", {
-        username: name,
-        email: email,
-        password: password,
-        passwordConfirmation: passwordConfirmation})
-    .then((response) => {
-        console.log(response);
-        localStorage.setItem('username', name);
-        window.location.href = "/Profile";
-    }
-    )
-    .catch((error) => {
-        console.log(error);
-    })
-    };
 
 
 // Showing success message
@@ -91,7 +108,7 @@ function updateUser(name, email, password, passwordConfirmation) {
 return (
     <div className="App bg-gray-300 min-h-screen">
         <Navbar />
-        <div className="flex justify-center items-center py-7 ">
+        <div  className="flex justify-center items-center py-7 ">
 
             <form className='bg-white shadow-md rounded px-12 pt-2 pb-6 mb-3 '>
                 <h1 className='text-2xl font-bold py-2 pb-2'>Edita tus datos</h1>
@@ -99,7 +116,7 @@ return (
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">Nombre de Usuario</label>
                     <input onChange={handleName} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    value={name} type="text" placeholder= {name} />
+                    value={name} type="text" placeholder= {currentUser.username} />
                 </div>
 
                 <div className="mb-6">

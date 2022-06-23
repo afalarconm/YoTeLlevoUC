@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Navbar from "./Navbar.js";
 import Axios from 'axios';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 export default function Form() {
 
 // States for registration
@@ -11,6 +11,14 @@ const [destino, setDestino] = useState('');
 const [cupos, setCupos] = useState('');
 const [hora_inicio, setHoraInicio] = useState('');
 const [comentarios, setComentarios] = useState('');
+const [precio, setPrecio] = useState('');
+const { currentUser } = useAuth();
+
+if (!currentUser) {
+    alert('Debes iniciar sesion para crear un viaje!');
+    window.location.href = '/login';
+}
+
 
 // States for checking the errors
 const [submitted, setSubmitted] = useState(false);
@@ -44,6 +52,11 @@ const handleHoraInicio = (e) => {
 
 const handleComentarios = (e) => {
     setComentarios(e.target.value);
+    setSubmitted(false);
+};
+
+const handlePrecio = (e) => {
+    setPrecio(e.target.value);
     setSubmitted(false);
 };
 
@@ -82,17 +95,28 @@ const [post, setPost] = React.useState(null);
   }, []);
 
   function updatePost() {
-      Axios.put(`http://localhost:3001/viajes/${id_viaje}`, {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${currentUser.token}`
+        }
+    };
+    const data = {
         origen: origen,
         destino: destino,
         cupos: cupos,
         hora_inicio: hora_inicio,
-        detalles: comentarios,
-      })
-      .then((response) => {
-        setPost(response.data);
-        window.location.href = "/viajes";
-      });
+        detalles: comentarios
+    };
+    Axios.put(`http://localhost:3001/viajes/${id_viaje}`, data, requestOptions)
+        .then(response => {
+            console.log(response);
+            window.location.href = '/Viajes';
+        }
+        ).catch(error => {
+            console.log(error);
+        }
+        );
   }
 
   if (!post) return "No post!"
@@ -133,6 +157,12 @@ return (
                     <label className="block text-gray-700 text-sm font-bold mb-2">Detalles del Viaje</label>
                     <input onChange={handleComentarios} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     value={comentarios} type="text" placeholder="Detalles del viaje" contentEditable='true'/>
+                </div>
+
+                <div className="mb-6">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Precio Individual</label>
+                    <input onChange={handlePrecio} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    value={precio} type="text" placeholder="Precio por pasajero" contentEditable='true'/>
                 </div>
 
                 <div className=" place-items-center" align='center'>
