@@ -3,10 +3,8 @@ import { useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import Axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import dateFormat from "dateformat";
-import { data } from 'autoprefixer';
-
 
 const ViajeDetails = () => {
     let navegar = useNavigate()
@@ -182,7 +180,7 @@ const ViajeDetails = () => {
 
             </div>
 
-            <div id='rating' className='bg-white shadow-md rounded-lg px-12 pt-2 pb-6 mb-3 max-w-sm justify-self-cente' style={{display: currentUser.review === viaje.id ? "none": ""}} >
+            <div id='rating' className='bg-white shadow-md rounded-lg px-12 pt-2 pb-6 mb-3 max-w-sm justify-self-cente' style={{display: currentUser.id === viaje.UserId ? "none": ""}} >
                 <h2 className='text-center text-xl'>Califica al Conductor</h2>
                 <br/>
                 <div className="mb-4">

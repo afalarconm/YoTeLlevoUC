@@ -17,13 +17,17 @@ const baseURL = "http://localhost:3001/viajes";
 export default function App() {
     let navegar = useNavigate()
     const { currentUser } = useAuth();
-    const [user, setUser] = useState(null)
-    useEffect(() => {
-        setUser(currentUser)
-    }, [currentUser]);
+    const [user, setUser] = useState([]);
 
     const navigate = useNavigate()
     const [post, setPost] = useState(null);
+
+    useEffect(() => {
+        if (currentUser) {
+            setUser(currentUser);
+        }
+    }, [currentUser]);
+
 
     useEffect(() => {
         Axios.get(baseURL).then((response) => {
@@ -72,26 +76,40 @@ export default function App() {
     }
 
 
+
     const Tabla=post.map(
         (info)=>{
-            return(
-                <tr>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6" key={info.id} >{info.origen}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{info.destino}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.cupos}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{dateFormat(info.hora_inicio, "dd/mm/yy h:MM TT")}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.detalles}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" style={{display: info.cupos === 0 ? "Lleno":""}} >${info.Precio}</td>
-                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                <button onClick={() => agregarPasajero(info)} style={{display: info.Pasajeros.includes(currentUser.id)||info.UserId === currentUser.id || info.cupos === 0 ? "none": ""}}  className="focus:outline-none text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-teal-500 dark:hover:bg-teal-600 dark:focus:ring-teal-800">Unirme!</button>
-                <button onClick={() => verViaje(info.id)} style={{display: info.Pasajeros.includes(currentUser.id)? "": "none"}} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:focus:ring-cyan-800">Ver detalles</button>
-                <button onClick={() => verViaje(info.id)} style={{display: info.UserId === currentUser.id? "": "none"}} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-500 dark:hover:bg-orange-600 dark:focus:ring-orange-800">Ver mi Viaje</button>
-
-             </td>
-            </tr>
-            )
+            if (user) {
+                return(
+                    <tr>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6" key={info.id} >{info.origen}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{info.destino}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.cupos}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{dateFormat(info.hora_inicio, "dd/mm/yy h:MM TT")}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.detalles}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" style={{display: info.cupos === 0 ? "Lleno":""}} >${info.Precio}</td>
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                    <button onClick={() => agregarPasajero(info)} style={{display: info.Pasajeros.includes(user.id)||info.UserId === user.id || info.cupos === 0 ? "none": ""}}  className="focus:outline-none text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-teal-500 dark:hover:bg-teal-600 dark:focus:ring-teal-800">Unirme!</button>
+                    <button onClick={() => verViaje(info.id)} style={{display: info.Pasajeros.includes(user.id)? "": "none"}} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:focus:ring-cyan-800">Ver detalles</button>
+                    <button onClick={() => verViaje(info.id)} style={{display: info.UserId === user.id? "": "none"}} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-500 dark:hover:bg-orange-600 dark:focus:ring-orange-800">Ver mi Viaje</button>
+                </td>
+                </tr>
+            )} else if (!user) {
+                return(
+                    <tr>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6" key={info.id} >{info.origen}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{info.destino}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.cupos}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{dateFormat(info.hora_inicio, "dd/mm/yy h:MM TT")}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" >{info.detalles}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" style={{display: info.cupos === 0 ? "Lleno":""}} >${info.Precio}</td>
+                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"></td>
+                </tr>
+                )   
+            }
         }
     )
+
 
 
 
@@ -109,7 +127,7 @@ export default function App() {
                     <p class="mt-2 text-sm text-gray-700">El listados de todos los viajes disponibles hasta el momento.</p>
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                    <button type="button" onClick={() => navigate("/CreateViaje")}  style={{display: currentUser ? "": "none"}} class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Añadir viaje</button>
+                    <button type="button" onClick={() => navigate("/CreateViaje")}  style={{display: user ? "": "none"}} class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 mr-2 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Añadir viaje</button>
                 </div>
             </div>
             <div class="mt-8 flex flex-col">
@@ -126,7 +144,6 @@ export default function App() {
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Comentarios</th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Precio Individual</th>
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                        <span class="sr-only" >Edit</span>
                                     </th>
                                 </tr>
                                 </thead>
