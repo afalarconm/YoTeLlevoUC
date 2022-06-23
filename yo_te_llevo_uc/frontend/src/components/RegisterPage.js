@@ -1,5 +1,5 @@
 import Navbar from './Navbar';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import Axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
