@@ -1,3 +1,20 @@
-# Proyecto-IIC2513-1-grupo-23 :computer:
+# Entrega 2 Proyecto Tecnologias y Aplicaciones Web
 
-Guillermo Ponce - Martin Quevedo - Andrés Federico Alarcón
+## Yo te llevo UC :computer:
+
+
+Para iniciar el servidor de backend:
+
+    sudo service postgresql start
+
+y despues:
+
+    yarn dev
+
+Para iniciar el servidor de frontend:
+
+    yarn start
+    
+Para entrar a la base de datos
+
+    sudo -u postgres psql
