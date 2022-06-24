@@ -22,7 +22,7 @@
     "frontend": "cd frontend && yarn start",
     "api": "cd backend && nodemon app.js",
     "dev": "concurrently --kill-others-on-fail \"yarn run backend\" \"yarn run frontend\"",
-    "heroku-postbuild": "cd frontend && yarn install && yarn run build"
+    "heroku-postbuild": "cd frontend && yarn install && yarn start"
   }
   
 }
