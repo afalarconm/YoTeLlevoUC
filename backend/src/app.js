@@ -2,22 +2,9 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const { Client } = require('pg')
 const app = express();
 
 const path = require('path')
-
-var client = new Client({
-  user: "afalarconm",
-  password: "1965Andres$",
-  database: "web_db",
-  port: 3001,
-  host: "host",
-  ssl: true
-});
-client.connect(function () {
-  console.log("connected");
-});
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, '../frontend/src/components')))
