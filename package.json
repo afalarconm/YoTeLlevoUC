@@ -20,9 +20,9 @@
   },
   "scripts": {
     "frontend": "cd frontend && yarn start",
-    "api": "cd backend && yarn start",
-    "dev": "concurrently --kill-others-on-fail \"yarn start backend\" \"yarn start frontend\"",
-    "heroku-postbuild": "cd frontend && yarn start && cd backend && yarn start"
+    "api": "cd backend && nodemon app.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn run backend\" \"yarn run frontend\"",
+    "heroku-postbuild": "cd frontend && yarn install && yarn run build"
   }
   
 }
