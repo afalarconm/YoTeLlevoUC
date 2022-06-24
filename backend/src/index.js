@@ -5,8 +5,6 @@ const db = require('./models');
 
 const PORT = process.env.PORT || 3001;
 
-
-
 db.sequelize.authenticate()
     .then(() => {
         console.log('Connection to db has been established successfully.');
