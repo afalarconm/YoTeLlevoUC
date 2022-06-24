@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node index.js",
+    "start": "node backend/index.js",
     "heroku-postbuild": "cd frontend && yarn && yarn run build"
   },
 
