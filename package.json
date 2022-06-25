@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node backend/src/index.js",
+    "start": "node backend/src/app.js",
     "heroku-postbuild": "cd frontend && yarn --production=false && yarn run build"
   },
   "dependencies": {
