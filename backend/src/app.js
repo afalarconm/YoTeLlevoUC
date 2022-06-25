@@ -4,6 +4,15 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const app = express();
 
+const path = require('path')
+
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, 'app/frontend/src/index.js')));
+console.log('hasta aca por lo menos llegue hrmo')
+
+// AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + 'app/frontend/src/index.js'))});
 
 const routes = require('./routes/index');
 
