@@ -18,7 +18,7 @@ const ProfilePage = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:3001/users/${currentUser.id}`, requestOptions)
+        fetch(`https://yo-te-llevo-api.herokuapp.com/users/${currentUser.id}`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setUser(data);
@@ -38,7 +38,7 @@ const ProfilePage = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:3001/review/user/${currentUser.id}`, requestOptions2)
+        fetch(`https://yo-te-llevo-api.herokuapp.com/review/user/${currentUser.id}`, requestOptions2)
             .then(response => response.json())
             .then(data => {
                 setRating(data);
@@ -66,9 +66,9 @@ const ProfilePage = () => {
         <div className="flex justify-center py-7">
             <div className='bg-white shadow-md rounded px-12 pt-2 pb-6 mb-3 '>
 
-            <h1 className="text-2xl font-bold text-left pl-7">Perfil</h1>
+            <h1 className="text-2xl font-bold text-center pr-2">Perfil</h1>
             <br />
-            <div align='center' className='pb-5'>
+            <div align='center' className='pb-5 pl-3'>
                 <img src="https://freesvg.org/img/abstract-user-flat-4.png" alt="user" className="w-12 h-12 rounded-full mr-4" />
             </div>
             <div className="mb-4">

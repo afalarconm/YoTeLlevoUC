@@ -92,7 +92,7 @@ const create_viaje = (e)=> {
             precio: precio,
             UserId: currentUser.id
         };
-        Axios.post('http://localhost:3001/CreateViaje', data, requestOptions)
+        Axios.post('https://yo-te-llevo-api.herokuapp.com/CreateViaje', data, requestOptions)
             .then(response => {
                 console.log(response);
                 window.location.href = '/viajes';

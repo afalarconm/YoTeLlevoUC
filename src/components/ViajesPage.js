@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const baseURL = "http://localhost:3001/viajes";
+const baseURL = "https://yo-te-llevo-api.herokuapp.com/viajes";
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
@@ -27,7 +27,6 @@ export default function App() {
             setUser(currentUser);
         }
     }, [currentUser]);
-
 
     useEffect(() => {
         Axios.get(baseURL).then((response) => {
@@ -59,7 +58,7 @@ export default function App() {
             Precio: viaje.Precio,
             Pasajeros: viaje.Pasajeros
         };
-        Axios.put(`http://localhost:3001/viajes/join/${viaje.id}`, data, requestOptions)
+        Axios.put(`https://yo-te-llevo-api.herokuapp.com/viajes/join/${viaje.id}`, data, requestOptions)
         .then(response => {
             console.log(response.data);
             window.location.reload()
@@ -90,7 +89,7 @@ export default function App() {
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" style={{display: info.cupos === 0 ? "Lleno":""}} >${info.Precio}</td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                     <button onClick={() => agregarPasajero(info)} style={{display: info.Pasajeros.includes(user.id)||info.UserId === user.id || info.cupos === 0 ? "none": ""}}  className="focus:outline-none text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-teal-500 dark:hover:bg-teal-600 dark:focus:ring-teal-800">Unirme!</button>
-                    <button onClick={() => verViaje(info.id)} style={{display: info.Pasajeros.includes(user.id)? "": "none"}} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:focus:ring-cyan-800">Ver detalles</button>
+                    <button onClick={() => verViaje(info.id)} style={{display: info.Pasajeros.includes(user.id)||user.admin===true? "": "none"}} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-cyan-500 dark:hover:bg-cyan-600 dark:focus:ring-cyan-800">Ver detalles</button>
                     <button onClick={() => verViaje(info.id)} style={{display: info.UserId === user.id? "": "none"}} className="text-white  font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-500 dark:hover:bg-orange-600 dark:focus:ring-orange-800">Ver mi Viaje</button>
                 </td>
                 </tr>

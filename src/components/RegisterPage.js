@@ -1,5 +1,5 @@
 import Navbar from './Navbar';
-import { useState } from 'react';
+import React, { useState } from "react";
 import useAuth from '../hooks/useAuth';
 import Axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
@@ -16,6 +16,8 @@ const [passwordConfirmation, setPasswordConfirmation] = useState('');
 // States for checking the errors
 const [submitted, setSubmitted] = useState(false);
 const [error, setError] = useState(false);
+
+const authContext = React.useContext(AuthContext);
 
 // Handling the name change
 const handleName = (e) => {
@@ -61,7 +63,7 @@ const handlePasswordConfirmation = (e) => {
 
 const register = (e)=> {
     e.preventDefault();
-    Axios.post("http://localhost:3001/auth/signup",{
+    Axios.post("https://yo-te-llevo-api.herokuapp.com/auth/signup",{
         username: name,
         password: password,
         passwordConfirmation: passwordConfirmation,
@@ -72,9 +74,7 @@ const register = (e)=> {
     if (response.status === 201) {
         setSubmitted(true);
         setError(false);
-        setUser(response.data);
-        AuthContext.handleUserLogin(response.data);
-        window.location.href = "/";
+        window.location.href = "/login";
     }
     else {
         setSubmitted(false);

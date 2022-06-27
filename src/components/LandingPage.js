@@ -13,10 +13,16 @@ function App() {
     setUser(currentUser)
   }, [currentUser])
 
+  if (user) {
+    if (user.admin === true) {
+      navigate("/admin")
+    }
+  }
+
   return (
     <div className="bg-grey-600">
       <Navbar />
-      <div className="flex flex-row h-screen bg-slate-800">
+      <div className="flex flex-row h-screen bg-slate-600">
 
           <div className="w-5/6 h-screen">
             <div className="flex flex-col items-center justify-center h-5/6">

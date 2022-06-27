@@ -24,7 +24,7 @@ const ViajeDetails = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:3001/viajes/${id}`, requestOptions)
+        fetch(`https://yo-te-llevo-api.herokuapp.com/viajes/${id}`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setViaje(data);
@@ -44,7 +44,7 @@ const ViajeDetails = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:3001/review/viaje/${id}`, requestOptions2)
+        fetch(`https://yo-te-llevo-api.herokuapp.com/review/viaje/${id}`, requestOptions2)
             .then(response => response.json())
             .then(data => {
                 setRating(data);
@@ -78,7 +78,7 @@ const ViajeDetails = () => {
             headers: {
                 'Authorization': `Bearer ${currentUser.token}`
             }};
-        Axios.delete(`http://localhost:3001/viajes/${id}`, requestOptions)
+        Axios.delete(`https://yo-te-llevo-api.herokuapp.com/viajes/${id}`, requestOptions)
             .then(response => {
                 console.log(response);
                 window.location.href = '/Viajes';
@@ -101,7 +101,7 @@ const ViajeDetails = () => {
                 ViajeId: viaje.id,
                 UserId: currentUser.id,
             }
-            Axios.post(`http://localhost:3001/review/new`, data, requestOptions)
+            Axios.post(`https://yo-te-llevo-api.herokuapp.com/review/new`, data, requestOptions)
             .then(response => {
                 console.log(response);
                 setVoted(true);
@@ -115,7 +115,7 @@ const ViajeDetails = () => {
                 ViajeId: viaje.id,
                 UserId: currentUser.id,
             }
-            Axios.post(`http://localhost:3001/review/new`, data, requestOptions)
+            Axios.post(`https://yo-te-llevo-api.herokuapp.com/review/new`, data, requestOptions)
             .then(response => {
                 console.log(response);
                 setVoted(true);
@@ -172,8 +172,8 @@ const ViajeDetails = () => {
 
             <div className='py-3'>
                 <button className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center"><a href='/Viajes'>Volver</a></button>
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => editViaje(id)} style={{display: currentUser.id === viaje.UserId ? "": "none"}} > Editar Viaje</button>
-                <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => deleteViaje(id)} style={{display: currentUser.id === viaje.UserId ? "": "none"}}>Eliminar</button>
+                <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => editViaje(id)} style={{display: currentUser.id === viaje.UserId ||currentUser.admin===true? "": "none"}} > Editar Viaje</button>
+                <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => deleteViaje(id)} style={{display: currentUser.id === viaje.UserId ||currentUser.admin===true? "": "none"}}>Eliminar</button>
             </div>
             
 
