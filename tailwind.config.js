@@ -6,7 +6,11 @@ module.exports = {
     backgroundImage: {
       'hero': "url('./assets/img/bg_image.jpg')"
     },
-    extend: {},
+    extend: {
+      colors: {
+        'navbar': '#1F2937',
+      },
+    }
   },
   plugins: [require('tailwindcss-gradients'),],
 }
