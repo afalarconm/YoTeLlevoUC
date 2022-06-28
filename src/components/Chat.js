@@ -19,7 +19,7 @@ function Chat({viaje}) {
 
   // get all of the trips messages
   useEffect(() => {
-    Axios.get(`http://localhost:3001/message/viaje/${viaje}`)
+    Axios.get(`https://yo-te-llevo-api.herokuapp.com/message/viaje/${viaje}`)
       .then(res => {
         console.log(res.data);  
         setMessageList(res.data);
@@ -49,7 +49,7 @@ function Chat({viaje}) {
           ":" +
           new Date(Date.now()).getMinutes(),
       };
-      await Axios.post('http://localhost:3001/message/new', messageData, requestOptions)
+      await Axios.post('https://yo-te-llevo-api.herokuapp.com/message/new', messageData, requestOptions)
             .then(response => {
                 setMessageList(response.data);
                 console.log(response);

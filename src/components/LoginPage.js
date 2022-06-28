@@ -31,7 +31,7 @@ function LoginPage() {
 
 async function getUser(username, pass) {
 try {
-    Axios.post('http://localhost:3001/auth/login', {params: {username, pass}}
+    Axios.post('https://yo-te-llevo-api.herokuapp.com/auth/login', {params: {username, pass}}
       ).then(res => {
         if (res.status === 401) {
           setErrorMessages(res.data.error);

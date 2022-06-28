@@ -29,7 +29,7 @@ const ViajeDetails = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:3001/viajes/${id}`, requestOptions)
+        fetch(`https://yo-te-llevo-api.herokuapp.com/viajes/${id}`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setViaje(data);
@@ -49,7 +49,7 @@ const ViajeDetails = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:3001/review/viaje/${id}`, requestOptions2)
+        fetch(`https://yo-te-llevo-api.herokuapp.com/review/viaje/${id}`, requestOptions2)
             .then(response => response.json())
             .then(data => {
                 setRating(data);
@@ -83,7 +83,7 @@ const ViajeDetails = () => {
             headers: {
                 'Authorization': `Bearer ${currentUser.token}`
             }};
-        Axios.delete(`http://localhost:3001/viajes/${id}`, requestOptions)
+        Axios.delete(`https://yo-te-llevo-api.herokuapp.com/viajes/${id}`, requestOptions)
             .then(response => {
                 console.log(response);
                 window.location.href = '/Viajes';
@@ -106,7 +106,7 @@ const ViajeDetails = () => {
                 ViajeId: viaje.id,
                 UserId: currentUser.id,
             }
-            Axios.post(`http://localhost:3001/review/new`, data, requestOptions)
+            Axios.post(`https://yo-te-llevo-api.herokuapp.com/review/new`, data, requestOptions)
             .then(response => {
                 console.log(response);
                 setVoted(true);
@@ -120,7 +120,7 @@ const ViajeDetails = () => {
                 ViajeId: viaje.id,
                 UserId: currentUser.id,
             }
-            Axios.post(`http://localhost:3001/review/new`, data, requestOptions)
+            Axios.post(`https://yo-te-llevo-api.herokuapp.com/review/new`, data, requestOptions)
             .then(response => {
                 console.log(response);
                 setVoted(true);

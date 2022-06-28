@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const baseURL = "http://localhost:3001/viajes";
+const baseURL = "https://yo-te-llevo-api.herokuapp.com/viajes";
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
@@ -58,7 +58,7 @@ export default function App() {
             Precio: viaje.Precio,
             Pasajeros: viaje.Pasajeros
         };
-        Axios.put(`http://localhost:3001/viajes/join/${viaje.id}`, data, requestOptions)
+        Axios.put(`https://yo-te-llevo-api.herokuapp.com/viajes/join/${viaje.id}`, data, requestOptions)
         .then(response => {
             console.log(response.data);
             window.location.reload()

@@ -32,7 +32,7 @@ const AdminPage = () => {
                     'Authorization': `Bearer ${currentUser.token}`
                 }
             };
-            const response = await Axios.get(`http://localhost:3001/users/all`, requestOptions);
+            const response = await Axios.get(`https://yo-te-llevo-api.herokuapp.com/users/all`, requestOptions);
             setUsuarios(response.data);
         }
         getUsuarios();
@@ -50,7 +50,7 @@ const AdminPage = () => {
                         'Authorization': `Bearer ${user.token}`
                     }
                 };
-                const response2 = await Axios.get(`http://localhost:3001/viajes`, requestOptions2);
+                const response2 = await Axios.get(`https://yo-te-llevo-api.herokuapp.com/viajes`, requestOptions2);
                 setViajes(response2.data);
             }
             getViajes();
@@ -72,7 +72,7 @@ function deleteUser(id_user) {
             'Authorization': `Bearer ${currentUser.token}`
         }
     };
-    Axios.delete(`http://localhost:3001/users/${id_user}`, requestOptions3)
+    Axios.delete(`https://yo-te-llevo-api.herokuapp.com/users/${id_user}`, requestOptions3)
         .then(response => {
             console.log(response);
             window.location.reload();
@@ -85,7 +85,7 @@ const deleteViaje = (id_viaje) => {
         headers: {
             'Authorization': `Bearer ${currentUser.token}`
         }};
-    Axios.delete(`http://localhost:3001/viajes/${id_viaje}`, requestOptions4)
+    Axios.delete(`https://yo-te-llevo-api.herokuapp.com/viajes/${id_viaje}`, requestOptions4)
         .then(response => {
             console.log(response);
             window.location.reload();
