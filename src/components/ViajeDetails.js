@@ -182,14 +182,6 @@ const ViajeDetails = () => {
                 <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => editViaje(id)} style={{display: currentUser.id === viaje.UserId ||currentUser.admin===true? "": "none"}} > Editar Viaje</button>
                 <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => deleteViaje(id)} style={{display: currentUser.id === viaje.UserId ||currentUser.admin===true? "": "none"}}>Eliminar</button>
             </div>
-
-
-                <div className='py-3'>
-                    <button className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center"><a href='/Viajes'>Volver</a></button>
-                    <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => editViaje(id)} style={{display: currentUser.id === viaje.UserId ? "": "none"}} > Editar Viaje</button>
-                    <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => deleteViaje(id)} style={{display: currentUser.id === viaje.UserId ? "": "none"}}>Eliminar</button>
-                    
-                </div>
         
             </div>
 
