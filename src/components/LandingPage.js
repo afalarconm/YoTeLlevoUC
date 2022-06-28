@@ -33,7 +33,7 @@ function App() {
             </h1>
             <br />
             <h2 className="text-3xl text-white max-w-6xl italic text-center">
-              <span className="bg-gradient-to-r bg-clip-text">La plataforma N1 para organizar tus turnos a la universidad</span>
+              <span className="bg-gradient-to-r bg-clip-text">La plataforma №1 para organizar tus turnos a la universidad</span>
             </h2>
             <br />
             <br />
