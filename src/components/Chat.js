@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ScrollToBottom, { useAtStart } from "react-scroll-to-bottom";
+import ScrollToBottom from "react-scroll-to-bottom";
 import Axios from 'axios';
 import useAuth from '../hooks/useAuth';
 import dateFormat from "dateformat";
