@@ -18,7 +18,7 @@ const ProfilePage = () => {
     };
 
     useEffect(() => {
-        fetch(`https://yo-te-llevo-api.herokuapp.com/users/${currentUser.id}`, requestOptions)
+        fetch(`http://localhost:3001/users/${currentUser.id}`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setUser(data);
@@ -38,7 +38,7 @@ const ProfilePage = () => {
     };
 
     useEffect(() => {
-        fetch(`https://yo-te-llevo-api.herokuapp.com/review/user/${currentUser.id}`, requestOptions2)
+        fetch(`http://localhost:3001/review/user/${currentUser.id}`, requestOptions2)
             .then(response => response.json())
             .then(data => {
                 setRating(data);

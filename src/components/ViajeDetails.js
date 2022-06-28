@@ -5,6 +5,11 @@ import Axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import dateFormat from "dateformat";
+import Chat from "./Chat";
+
+
+
+
 
 const ViajeDetails = () => {
     let navegar = useNavigate()
@@ -24,7 +29,7 @@ const ViajeDetails = () => {
     };
 
     useEffect(() => {
-        fetch(`https://yo-te-llevo-api.herokuapp.com/viajes/${id}`, requestOptions)
+        fetch(`http://localhost:3001/viajes/${id}`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setViaje(data);
@@ -44,7 +49,7 @@ const ViajeDetails = () => {
     };
 
     useEffect(() => {
-        fetch(`https://yo-te-llevo-api.herokuapp.com/review/viaje/${id}`, requestOptions2)
+        fetch(`http://localhost:3001/review/viaje/${id}`, requestOptions2)
             .then(response => response.json())
             .then(data => {
                 setRating(data);
@@ -78,7 +83,7 @@ const ViajeDetails = () => {
             headers: {
                 'Authorization': `Bearer ${currentUser.token}`
             }};
-        Axios.delete(`https://yo-te-llevo-api.herokuapp.com/viajes/${id}`, requestOptions)
+        Axios.delete(`http://localhost:3001/viajes/${id}`, requestOptions)
             .then(response => {
                 console.log(response);
                 window.location.href = '/Viajes';
@@ -101,7 +106,7 @@ const ViajeDetails = () => {
                 ViajeId: viaje.id,
                 UserId: currentUser.id,
             }
-            Axios.post(`https://yo-te-llevo-api.herokuapp.com/review/new`, data, requestOptions)
+            Axios.post(`http://localhost:3001/review/new`, data, requestOptions)
             .then(response => {
                 console.log(response);
                 setVoted(true);
@@ -115,7 +120,7 @@ const ViajeDetails = () => {
                 ViajeId: viaje.id,
                 UserId: currentUser.id,
             }
-            Axios.post(`https://yo-te-llevo-api.herokuapp.com/review/new`, data, requestOptions)
+            Axios.post(`http://localhost:3001/review/new`, data, requestOptions)
             .then(response => {
                 console.log(response);
                 setVoted(true);
@@ -135,11 +140,13 @@ const ViajeDetails = () => {
         {error? <h1>{error.message}</h1>: null}
         {isLoading ? <h1>Cargando...</h1>: null}
 
-        <div className="flex-col py-7" align='center'>
+        <div className='flex flex-column justify-center' align='center'>
+            <div className="flex-row py-7" align='center'>
             
             <div className='bg-white shadow-md rounded px-12 pt-2 pb-6 mb-3 max-w-md'>
             <h1 className='text-center text-xl font-bold'>Detalles del Viaje</h1>
             <br/>
+
             <div className="mb-4">
                 <label className="block text-gray-700 text-medium mb-2">Origen: {viaje.origen}</label>
                 <label></label>
@@ -175,11 +182,18 @@ const ViajeDetails = () => {
                 <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => editViaje(id)} style={{display: currentUser.id === viaje.UserId ||currentUser.admin===true? "": "none"}} > Editar Viaje</button>
                 <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => deleteViaje(id)} style={{display: currentUser.id === viaje.UserId ||currentUser.admin===true? "": "none"}}>Eliminar</button>
             </div>
-            
 
 
+                <div className='py-3'>
+                    <button className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center"><a href='/Viajes'>Volver</a></button>
+                    <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => editViaje(id)} style={{display: currentUser.id === viaje.UserId ? "": "none"}} > Editar Viaje</button>
+                    <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 mx-2 rounded focus:outline-none focus:shadow-outline content-center" onClick={() => deleteViaje(id)} style={{display: currentUser.id === viaje.UserId ? "": "none"}}>Eliminar</button>
+                    
+                </div>
+        
             </div>
 
+            
             <div id='rating' className='bg-white shadow-md rounded-lg px-12 pt-2 pb-6 mb-3 max-w-sm justify-self-cente' style={{display: currentUser.id === viaje.UserId ? "none": ""}} >
                 <h2 className='text-center text-xl'>Califica al Conductor</h2>
                 <br/>
@@ -189,6 +203,16 @@ const ViajeDetails = () => {
                 </div>
 
             </div>
+
+            </div>
+
+            <div className='bg-white shadow-md rounded ml-4 px-12 pt-2 mt-7 mb-10 '>
+                <Chat viaje = {id} />
+            </div>
+
+
+            
+        
             
         </div>
 
@@ -197,6 +221,8 @@ const ViajeDetails = () => {
                 &copy;Tecnologías y Aplicaciones Web - Grupo 23 - 2022.
             </p>
         </div>
+
+        
     )
 }
 

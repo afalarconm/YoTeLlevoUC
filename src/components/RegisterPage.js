@@ -63,7 +63,7 @@ const handlePasswordConfirmation = (e) => {
 
 const register = (e)=> {
     e.preventDefault();
-    Axios.post("https://yo-te-llevo-api.herokuapp.com/auth/signup",{
+    Axios.post("http://localhost:3001/auth/signup",{
         username: name,
         password: password,
         passwordConfirmation: passwordConfirmation,

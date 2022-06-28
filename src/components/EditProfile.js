@@ -66,7 +66,7 @@ function deleteUser() {
             'Authorization': `Bearer ${currentUser.token}`
         }
     };
-    Axios.delete(`https://yo-te-llevo-api.herokuapp.com/users/${currentUser.id}`, requestOptions)
+    Axios.delete(`http://localhost:3001/users/${currentUser.id}`, requestOptions)
         .then(response => {
             console.log(response);
             authContext.handleUserLogout();
@@ -86,7 +86,7 @@ function updateUser(name, email, password, passwordConfirmation) {
         password: password,
         passwordConfirmation: passwordConfirmation
     }
-    Axios.patch(`https://yo-te-llevo-api.herokuapp.com/users/${currentUser.id}`, data, requestOptions)
+    Axios.patch(`http://localhost:3001/users/${currentUser.id}`, data, requestOptions)
     .then(res => {
         console.log(res);
         console.log(res.data);

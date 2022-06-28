@@ -89,7 +89,7 @@ const errorMessage = () => {
 const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
-    Axios.get("https://yo-te-llevo-api.herokuapp.com/viajes/").then((response) => {
+    Axios.get("http://localhost:3001/viajes/").then((response) => {
       setPost(response.data)
     });
   }, []);
@@ -108,7 +108,7 @@ const [post, setPost] = React.useState(null);
         hora_inicio: hora_inicio,
         detalles: comentarios
     };
-    Axios.put(`https://yo-te-llevo-api.herokuapp.com/viajes/${id_viaje}`, data, requestOptions)
+    Axios.put(`http://localhost:3001/viajes/${id_viaje}`, data, requestOptions)
         .then(response => {
             console.log(response);
             window.location.href = '/Viajes';
