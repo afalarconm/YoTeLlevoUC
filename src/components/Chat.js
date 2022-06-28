@@ -66,7 +66,7 @@ function Chat({viaje}) {
   return (
     <div className="chat-window">
       <div className="chat-header">
-        <p className='text-center text-xl font-bold'> Chat {viaje}</p>
+        <p className='text-center text-xl font-bold'> Chat </p>
       </div>
       <div className="chat-body border-2 rounded-md py-3 px-3 mb-2">
         <ScrollToBottom className="message-container">
